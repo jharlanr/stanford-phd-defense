@@ -1,0 +1,971 @@
+{
+ "about": "Acknowledgements split-out faces. Photos only from official/professional pages that name the person with a matching affiliation; otherwise initials. crop = [cx, cy, side]: face centre (fractions of width/height), square side (fraction of the shorter edge). `url` (the director asked that a click on a name or headshot open the person's own website) = the person's own site first, else their official profile page; absent = unlinked. `size` (optional) = output pixels for the small bullet faces; `mask: circle` (logos) = cut a round badge out of its white background; `dark_filter` (logos) = a CSS filter the page applies so a mark drawn for white reads on the dark plate. Built by build_headshots.py → R2 acks/people_v2/<slug>.jpg|png. `prefix` (optional) = the R2 prefix this tile was baked into when it is not the default acks/people_v2 (new faces go to a new prefix; never re-upload over v2).",
+ "people": [
+  {
+   "name": "Ching-Yao Lai",
+   "slug": "ching-yao-lai",
+   "groups": [
+    "Committee and advisors",
+    "Coauthors"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/ching-yao-lai",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/307218/resources/profilephoto/350x350.1730009011090.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Assistant Professor of Geophysics",
+   "crop": [
+    0.535,
+    0.509,
+    0.812
+   ],
+   "url": "https://icyphysics.stanford.edu/",
+   "url_note": "her group site (Icy Physics)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Dustin Schroeder",
+   "slug": "dustin-schroeder",
+   "groups": [
+    "Committee and advisors"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/dustin-schroeder",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/73263/resources/profilephoto/350x350.1666362006036.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Professor of Geophysics and of Electrical Engineering",
+   "crop": [
+    0.51,
+    0.499,
+    0.812
+   ],
+   "url": "https://www.radioglaciology.com/",
+   "url_note": "his group site (Stanford Radio Glaciology)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Eric Dunham",
+   "slug": "eric-dunham",
+   "groups": [
+    "Committee and advisors"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/eric-dunham",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/14136/resources/profilephoto/350x350.1509502890931.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Professor of Geophysics",
+   "crop": [
+    0.5,
+    0.475,
+    1.15
+   ],
+   "pad": true,
+   "url": "https://pangea.stanford.edu/~edunham/",
+   "url_note": "personal Stanford page",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Ettore Biondi",
+   "slug": "ettore-biondi",
+   "groups": [
+    "Committee and advisors"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/ettore-biondi",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/54686/resources/profilephoto/350x350.1755732238041.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Assistant Professor of Geophysics",
+   "crop": [
+    0.51,
+    0.311,
+    0.68
+   ],
+   "pad": true,
+   "url": "https://profiles.stanford.edu/ettore-biondi",
+   "url_note": "Stanford Profiles (no personal site found; geophysics.stanford.edu/people/ettore-biondi is behind a login)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Jef Caers",
+   "slug": "jef-caers",
+   "groups": [
+    "Committee and advisors",
+    "Coauthors"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/jef-caers",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/9119/resources/profilephoto/350x350.1672851695324.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Professor of Earth and Planetary Sciences and, by courtesy, of Geophysics",
+   "crop": [
+    0.53,
+    0.422,
+    0.86
+   ],
+   "pad": true,
+   "url": "https://profiles.stanford.edu/jef-caers",
+   "url_note": "Stanford Profiles (links Mineral-X; no personal site found)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Ellianna Abrahams",
+   "slug": "ellianna-abrahams",
+   "groups": [
+    "Coauthors",
+    "Stanford Research Computing team"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/cbef310a-576c-4aab-a27f-bc5adcd829a3/Ellie.jpg?format=1000w",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Lai group People page caption: research software technology specialist at Stanford",
+   "crop": [
+    0.37,
+    0.475,
+    0.95
+   ],
+   "pad": true,
+   "url": "https://geophysics.stanford.edu/people/ellianna-abrahams",
+   "url_note": "Stanford Geophysics people page (profiles.stanford.edu/ellianna is 404; elliesch.github.io is gone)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Michael G. Shahin",
+   "slug": "michael-shahin",
+   "groups": [
+    "Coauthors"
+   ],
+   "kind": "photo",
+   "source_page": "https://earth.sas.upenn.edu/people/michael-shahin",
+   "image_url": "https://earth.sas.upenn.edu/sites/default/files/2025-01/igs_selfie.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Penn EES profile: Post Doctoral Researcher, Stearns Glaciology; PhD Kansas 2024",
+   "crop": [
+    0.365,
+    0.594,
+    0.76
+   ],
+   "pad": true,
+   "url": "https://earth.sas.upenn.edu/people/michael-shahin",
+   "url_note": "Penn EES profile (its Website field is Google Scholar)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Niall B. Coffey",
+   "slug": "niall-coffey",
+   "groups": [
+    "Coauthors"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/1633628180794-5Q964T8LTP6C8ME7HREH/186558399_2862270244088204_8038088910138302852_n+%282%29.jpg?format=1000w",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Lai group People page (Alumni) caption: PhD student 2021–2026, Princeton AOS/GFDL from Fall 2026",
+   "crop": [
+    0.48,
+    0.408,
+    0.634
+   ],
+   "url": "https://nbcoffey.github.io/",
+   "url_note": "personal site",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Eojin Lee",
+   "slug": "eojin-lee",
+   "groups": [
+    "Coauthors"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/0a99375d-70b3-4763-aba4-9bd319a9d41f/EojinLee_picture.jpg?format=1000w",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Lai group People page caption: PhD student in Geophysics",
+   "crop": [
+    0.49,
+    0.407,
+    0.613
+   ],
+   "url": "https://icyphysics.stanford.edu/people",
+   "url_note": "Lai group People page (no personal site found)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Laura A. Stevens",
+   "slug": "laura-stevens",
+   "groups": [
+    "Coauthors",
+    "Fieldwork teammates",
+    "External collaborators (NSF/NERC team)"
+   ],
+   "kind": "photo",
+   "source_page": "https://intelligent-earth.ox.ac.uk/people/laura-stevens",
+   "image_url": "https://intelligent-earth.ox.ac.uk/sites/g/files/vzsiac2961/files/ie/images/person/img_8030_las_downsized.png",
+   "fetched": "2026-10-02",
+   "confidence": "medium",
+   "evidence": "Oxford Intelligent Earth profile: Associate Professor, Dept. of Earth Sciences. Field photo (hat, mirrored sunglasses) — the Earth Sciences dept photo is a back/side view on the ice",
+   "crop": [
+    0.595,
+    0.212,
+    0.66
+   ],
+   "pad": true,
+   "url": "https://www.earth.ox.ac.uk/people/laura-stevens",
+   "url_note": "Oxford Earth Sciences profile (no personal site found; GitHub goodnesglaciers)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Stanford Icy Physics Group",
+   "slug": "stanford-icy-physics-group",
+   "groups": [
+    "Research groups"
+   ],
+   "kind": "logo",
+   "source_page": "https://icyphysics.stanford.edu/",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/7b2b606f-5a20-41ec-a48f-57d16cba1d85/LaiLab_YaoColors.png",
+   "fetched": "2026-10-02",
+   "confidence": "medium",
+   "evidence": "On the group homepage, file named LaiLab_YaoColors.png; not captioned as a logo",
+   "url": "https://icyphysics.stanford.edu/",
+   "url_note": "the group site",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Stanford Mineral-X",
+   "slug": "stanford-mineral-x",
+   "groups": [
+    "Research groups"
+   ],
+   "kind": "logo",
+   "source_page": "https://mineralx.stanford.edu/",
+   "image_url": "https://mineralx.stanford.edu/sites/g/files/sbiybj28096/files/2023-07/logo_v5_2.png",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Site-header lockup, alt \"Mineral-X\". On the page's dark plate the mid-blue wordmark went dim, so the page shows it through a CSS brightness(1.5) (dark_filter) — the stored mark is untouched",
+   "url": "https://mineralx.stanford.edu/",
+   "url_note": "the initiative site",
+   "url_fetched": "2026-10-03",
+   "dark_filter": "brightness(1.5)"
+  },
+  {
+   "name": "Meredith Nettles",
+   "slug": "meredith-nettles",
+   "groups": [
+    "Fieldwork teammates"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.iris.edu/hq/programs/epo/distinguished_lectureship/speakers/meredith_nettles",
+   "image_url": "https://www.iris.edu/hq/files/programs/education_and_outreach/distinguished_lectureship/images/MN_heli_crop-1.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "IRIS Distinguished Lectureship speaker page: Lamont-Doherty Earth Observatory, Columbia; same photo on her LDEO homepage (~2012)",
+   "crop": [
+    0.55,
+    0.505,
+    0.95
+   ],
+   "pad": true,
+   "url": "https://www.ldeo.columbia.edu/~nettles/",
+   "url_note": "her LDEO page",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Stacy Larochelle",
+   "slug": "stacy-larochelle",
+   "groups": [
+    "Fieldwork teammates"
+   ],
+   "kind": "photo",
+   "source_page": "https://lamont.columbia.edu/directory/stacy-larochelle",
+   "image_url": "https://lamont.columbia.edu/sites/default/files/styles/cu_crop/public/cu_ldeo_profile_import/4289/PXL_20230901_182804945~3.jpg?itok=bv0lq61B",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "LDEO directory (Wayback 2025-05-16; live page Cloudflare-walled): postdoc with Kingslake, Nettles, Stevens; same photo on stacylarochelle.com",
+   "crop": [
+    0.667,
+    0.315,
+    0.75
+   ],
+   "pad": true,
+   "url": "https://www.stacylarochelle.com/",
+   "url_note": "personal site",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Marianne Okal",
+   "slug": "marianne-okal",
+   "groups": [
+    "Fieldwork teammates"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.earthscope.org/staff/marianne-okal/",
+   "image_url": "https://www.earthscope.org/app/uploads/2022/11/Marianne_Okal-2048x1536-1-e1668284960903.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "EarthScope staff page (Wayback 2024-08-14; now 404): Engineering Manager II, polar field engineers",
+   "crop": [
+    0.505,
+    0.476,
+    0.937
+   ],
+   "url_note": "no live page — the EarthScope staff page is 404 (Wayback only); now a project manager at NSIDC with no staff page found; unlinked"
+  },
+  {
+   "name": "Mark Behn",
+   "slug": "mark-behn",
+   "groups": [
+    "Fieldwork teammates"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.bc.edu/bc-web/schools/mcas/departments/eesc/people/faculty-directory/mark-behn.html",
+   "image_url": "https://www.bc.edu/content/dam/bc1/schools/mcas/main-mcas/Behn-Mark_700x980%20copy.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Boston College EES faculty directory: Mark D. Behn, Professor",
+   "crop": [
+    0.483,
+    0.256,
+    0.709
+   ],
+   "url": "https://www.bc.edu/bc-web/schools/mcas/departments/eesc/people/faculty-directory/mark-behn.html",
+   "url_note": "Boston College faculty page (no lab site found)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Nick Lau",
+   "slug": "nick-lau",
+   "groups": [
+    "Fieldwork teammates"
+   ],
+   "kind": "photo",
+   "source_page": "https://scripps.ucsd.edu/profiles/h4lau",
+   "image_url": "https://scripps.ucsd.edu/sites/default/files/profilePhoto/lau_ho-man-2.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Scripps Institution of Oceanography profile 'Lau, Nick — Student SIO - PhD'; the director confirmed him as a Scripps geophysics student on the 2023 crew; the team's AGU 2023 abstract (Larochelle, Stevens, Nettles, Kingslake, Lu, Lau, Behn, Fan, Das) lists him",
+   "crop": [
+    0.49,
+    0.417,
+    1.0
+   ],
+   "pad": true,
+   "url": "https://scripps.ucsd.edu/profiles/h4lau",
+   "url_note": "Scripps profile",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Leigh Stearns",
+   "slug": "leigh-stearns",
+   "groups": [
+    "External collaborators (NSF/NERC team)"
+   ],
+   "kind": "photo",
+   "source_page": "https://earth.sas.upenn.edu/people/leigh-stearns",
+   "image_url": "https://earth.sas.upenn.edu/sites/default/files/2024-08/leigh_icecave2023_2_0.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Penn EES profile page, its only portrait (ice-cave selfie)",
+   "crop": [
+    0.5,
+    0.417,
+    0.85
+   ],
+   "pad": true,
+   "url": "https://pennpolar.sas.upenn.edu/",
+   "url_note": "her group site (Penn Polar), the Website field of her Penn profile",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Ian Hewitt",
+   "slug": "ian-hewitt",
+   "groups": [
+    "External collaborators (NSF/NERC team)"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.trinity.ox.ac.uk/people/ian-hewitt",
+   "image_url": "https://www.trinity.ox.ac.uk/sites/default/files/2025-05/ian_hewitt_trinity_by_ian_wallman_0341.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Trinity College Oxford profile (alt \"Ian Hewitt\"): Professor, Mathematical Institute; same photo on maths.ox.ac.uk",
+   "crop": [
+    0.5,
+    0.444,
+    0.725
+   ],
+   "url": "https://people.maths.ox.ac.uk/hewitt/",
+   "url_note": "personal Oxford Maths page",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Brian Tempero",
+   "slug": "brian-tempero",
+   "groups": [
+    "Stanford Research Computing team"
+   ],
+   "kind": "photo",
+   "source_page": "https://sdss-compute.stanford.edu/people/brian-tempero",
+   "image_url": "https://sdss-compute.stanford.edu/sites/g/files/sbiybj15561/files/media/person/brian-tempero1509497103390.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "medium",
+   "evidence": "SDSS Center for Computation profile: HPC System Administrator; same photo on srcc.stanford.edu. Casual (cap, sunglasses), 350 px source",
+   "crop": [
+    0.48,
+    0.39,
+    1.24
+   ],
+   "pad": true,
+   "url": "https://sdss-compute.stanford.edu/people/brian-tempero",
+   "url_note": "SDSS Center for Computation profile",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Bob Clapp",
+   "slug": "bob-clapp",
+   "groups": [
+    "Stanford Research Computing team"
+   ],
+   "kind": "initials",
+   "note": "no official photo — profiles.stanford.edu/robert-clapp is gone (404; the Oct 2024 Wayback copy shows the placeholder), sdss-compute.stanford.edu/people lists 'Robert Clapp, Sr Research Engineer' with the default placeholder image, geophysics.stanford.edu/people/robert-clapp is behind a login, the SEG Wiki refuses fetches; initials tile",
+   "url_note": "no live page — profiles.stanford.edu/robert-clapp 404, sdss-compute.stanford.edu/people/robert-clapp behind a login; unlinked"
+  },
+  {
+   "name": "Liliane Pereira",
+   "slug": "liliane-pereira",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/liliane-pereira",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/70332/resources/profilephoto/350x350.1509518460399.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Adm Assoc 3, Geophysics",
+   "crop": [
+    0.51,
+    0.436,
+    0.522
+   ],
+   "url": "https://profiles.stanford.edu/liliane-pereira",
+   "url_note": "Stanford Profiles",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Jeremy Samos",
+   "slug": "jeremy-samos",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/jeremy-samos",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/286385/resources/profilephoto/350x350.1661895617223.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Adm Assoc 3, Geophysics",
+   "crop": [
+    0.47,
+    0.486,
+    0.94
+   ],
+   "url": "https://profiles.stanford.edu/jeremy-samos",
+   "url_note": "Stanford Profiles",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Clark Campagna",
+   "slug": "clark-campagna",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/clark-campagna",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/300047/resources/profilephoto/350x350.1658868011663.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Assistant Director of Student Services, Geophysics",
+   "crop": [
+    0.535,
+    0.409,
+    1.06
+   ],
+   "pad": true,
+   "url": "https://profiles.stanford.edu/clark-campagna",
+   "url_note": "Stanford Profiles",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Cheryl Johnson",
+   "slug": "cheryl-johnson",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "initials",
+   "source_page": "https://profiles.stanford.edu/cheryl-johnson",
+   "image_url": null,
+   "fetched": null,
+   "confidence": "high",
+   "evidence": "Stanford Profiles + EPS page name her (Earth & Planetary Sciences) but show only the default placeholder",
+   "url": "https://profiles.stanford.edu/cheryl-johnson",
+   "url_note": "Stanford Profiles",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Daniela Dimitrova",
+   "slug": "daniela-dimitrova",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/daniela-dimitrova",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/73041/resources/profilephoto/350x350.1665009013199.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: Administrative Associate & Program Administrator, Earth & Planetary Sciences",
+   "crop": [
+    0.524,
+    0.39,
+    0.95
+   ],
+   "pad": true,
+   "url": "https://profiles.stanford.edu/daniela-dimitrova",
+   "url_note": "Stanford Profiles",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Pandora del Carmen",
+   "slug": "pandora-del-carmen",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "photo",
+   "source_page": "https://geophysics.stanford.edu/people/pandora-del-carmen-0",
+   "image_url": "https://geophysics.stanford.edu/sites/geophysics/files/media/image/pandora_0.jpg",
+   "fetched": "2026-10-02",
+   "confidence": "high",
+   "evidence": "Stanford Geophysics staff page (page title 'Pandora del Carmen | Geophysics'): Senior Administrative Associate, Geophysics; profiles.stanford.edu/pandora-del-carmen names her likewise (no photo there). Source image is small (265x190).",
+   "crop": [
+    0.49,
+    0.469,
+    1.147
+   ],
+   "pad": true,
+   "url": "https://geophysics.stanford.edu/people/pandora-del-carmen-0",
+   "url_note": "Stanford Geophysics staff page",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Yongji Wang",
+   "slug": "yongji-wang",
+   "groups": [
+    "Coauthors",
+    "Post-doc mentors"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/1611929214309-04AWN5A599GEMIQAXNLO/Untitled.jpg?format=1000w",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Lai group People page caption: Visiting Scholar in the group and Research Scientist at DeepMind; postdoc in the group 2021–2023, NYU Courant 2023–2025. Source is small (267 px)",
+   "crop": [
+    0.5,
+    0.32,
+    0.62
+   ],
+   "url": "https://icyphysics.stanford.edu/people",
+   "url_note": "Lai group People page (no personal site found: NYU/Courant pages gone, no GitHub Pages, only Scholar + email on the lab page)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Fiona Clerc",
+   "slug": "fiona-clerc",
+   "groups": [
+    "Coauthors",
+    "Post-doc mentors"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/ce0c0589-7f9a-40c8-a38f-dd819ee57a5e/profile_Fiona.png?format=1000w",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Lai group People page caption: postdoc in the group 2024–2025, Stony Brook faculty from Winter 2026; same photo on fionaclerc.github.io",
+   "crop": [
+    0.52,
+    0.48,
+    1.0
+   ],
+   "url": "https://fionaclerc.github.io/",
+   "url_note": "personal site (linked from the lab page)",
+   "url_fetched": "2026-10-03",
+   "pad": true
+  },
+  {
+   "name": "Olivier Gagliardini",
+   "slug": "olivier-gagliardini",
+   "groups": [
+    "Coauthors",
+    "External collaborators (NSF/NERC team)"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.ige-grenoble.fr/olivier-gagliardini",
+   "image_url": "https://www.ige-grenoble.fr/sites/www.ige-grenoble.fr/IMG/jpg/olivier_gagliardini_low.jpg",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "IGE Grenoble personal page: \"Professor at University Grenoble Alpes\", Elmer/Ice",
+   "crop": [
+    0.5,
+    0.46,
+    1.0
+   ],
+   "url": "https://www.ige-grenoble.fr/olivier-gagliardini",
+   "url_note": "his IGE page (no separate personal site; the Elmer/Ice site is the project)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "James P. Hilditch",
+   "slug": "james-hilditch",
+   "groups": [
+    "Coauthors"
+   ],
+   "kind": "initials",
+   "source_page": "https://earthsystemscience.stanford.edu/people/jamie-hilditch",
+   "image_url": null,
+   "fetched": null,
+   "confidence": "high",
+   "evidence": "Stanford Earth System Science: \"Jamie Hilditch, Postdoctoral Scholar\" (Greenland meltwater drainage) — the page and profiles.stanford.edu/jamie-hilditch both show the default placeholder; Scholar lists him as James P. Hilditch (JFM papers)",
+   "note": "no official photo anywhere (ESS page + Stanford Profiles = placeholder; no personal site; a GitHub avatar is not an official page); initials tile",
+   "url": "https://earthsystemscience.stanford.edu/people/jamie-hilditch",
+   "url_note": "Stanford ESS profile (no personal site found)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Facu Sapienza",
+   "slug": "facu-sapienza",
+   "groups": [
+    "Post-doc mentors"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/b8c07025-e48b-4511-acb7-70a375615e62/Facu.jpg?format=1000w",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Lai group People page caption: Facundo Sapienza, postdoc in the group 2024–2026",
+   "crop": [
+    0.52,
+    0.38,
+    0.76
+   ],
+   "url": "https://facusapienza.org/",
+   "url_note": "personal site (linked from the lab page)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Yue (Olivia) Meng",
+   "slug": "yue-olivia-meng",
+   "groups": [
+    "Post-doc mentors"
+   ],
+   "kind": "photo",
+   "source_page": "https://olivmeng.github.io/",
+   "image_url": "https://olivmeng.github.io/imagesMeng/HeadShot.JPG",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Her Purdue group site (Meng Research Group, \"led by Dr. Yue (Olivia) Meng\", Assistant Professor of Civil and Construction Engineering) — the Website link on the Lai group People page (postdoc in the group 2022–2024); the lab page's own photo of her is a cycling shot in helmet + sunglasses",
+   "crop": [
+    0.5,
+    0.31,
+    0.62
+   ],
+   "url": "https://olivmeng.github.io/",
+   "url_note": "her group site (linked from the lab page)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Princeton AOS",
+   "slug": "princeton-aos",
+   "groups": [
+    "Research groups"
+   ],
+   "kind": "logo",
+   "source_page": "https://aos.princeton.edu/",
+   "image_url": "https://aos.princeton.edu/sites/g/files/toruqf1176/files/aos-logo-new.jpg",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "The AOS site header mark (file aos-logo-new.jpg, 154×150, on white): the round \"AOS\" badge; no larger copy found on princeton.edu",
+   "mask": "circle",
+   "url": "https://aos.princeton.edu/",
+   "url_note": "the program site",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Prof. Howard Stone",
+   "slug": "howard-stone",
+   "groups": [
+    "Princeton AOS"
+   ],
+   "kind": "photo",
+   "source_page": "https://mae.princeton.edu/people/howard-stone",
+   "image_url": "https://mae.princeton.edu/sites/g/files/toruqf7696/files/styles/3x4_750w_1000h/public/HStoneHeadShotDec2018.jpg?itok=463c8drw",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Princeton MAE profile (alt \"Howard A. Stone\"): Neil A. Omenn ’68 University Professor of Mechanical and Aerospace Engineering",
+   "crop": [
+    0.5,
+    0.39,
+    1.12
+   ],
+   "size": 160,
+   "url": "https://stonelab.princeton.edu/",
+   "url_note": "his group site (Complex Fluids Group, the Website field of his MAE profile)",
+   "url_fetched": "2026-10-03",
+   "pad": true
+  },
+  {
+   "name": "Prof. Jeroen Tromp",
+   "slug": "jeroen-tromp",
+   "groups": [
+    "Princeton AOS"
+   ],
+   "kind": "photo",
+   "source_page": "https://geosciences.princeton.edu/people/jeroen-tromp",
+   "image_url": "https://geosciences.princeton.edu/sites/g/files/toruqf7616/files/styles/3x4_750w_1000h/public/2022-11/2022-jeroen-tromp-photo-laura-pedrick-0017.png?itok=IVIWyTPc",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Princeton Geosciences profile (alt \"Jeroen Tromp profile pic\"): Blair Professor of Geology",
+   "crop": [
+    0.5,
+    0.39,
+    1.12
+   ],
+   "size": 160,
+   "url": "https://tromp.princeton.edu/",
+   "url_note": "his research site (the Website field of his Geosciences profile)",
+   "url_fetched": "2026-10-03",
+   "pad": true
+  },
+  {
+   "name": "Prof. Stephen Griffies",
+   "slug": "stephen-griffies",
+   "groups": [
+    "Princeton AOS"
+   ],
+   "kind": "photo",
+   "source_page": "https://aos.princeton.edu/people/stephen-griffies",
+   "image_url": "https://stephengriffies.github.io/assets/images/Griffies_2025-08-21.jpeg",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "The AOS people entry redirects to his own site (stephengriffies.github.io: retired from NOAA GFDL May 2025, remains in the Princeton AOS Program); its 2025-08 portrait. The GFDL homepage is gone; a 2017 ship photo is on cimes.princeton.edu",
+   "crop": [
+    0.5,
+    0.43,
+    1.2
+   ],
+   "size": 160,
+   "url": "https://stephengriffies.github.io/",
+   "url_note": "personal site (where the AOS directory points)",
+   "url_fetched": "2026-10-03",
+   "pad": true
+  },
+  {
+   "name": "Ming-Ruey Chou",
+   "slug": "ming-ruey-chou",
+   "groups": [
+    "Princeton AOS"
+   ],
+   "kind": "photo",
+   "source_page": "https://icyphysics.stanford.edu/people",
+   "image_url": "https://images.squarespace-cdn.com/content/v1/5f502852f36d51610004c15d/1626116408975-KV8GHGDBWXC1KKIGO85S/this_issue_image.JPG?format=1000w",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Lai group People page caption: \"Ray (Ming-Ruey) Chou worked in our group as a machine learning engineer in 2021-2022\" (the Princeton years). geosciences.princeton.edu/people/ray-ming-ruey-chou is behind a CAS login; LinkedIn not needed for the photo",
+   "crop": [
+    0.55,
+    0.41,
+    0.64
+   ],
+   "size": 160,
+   "url": "https://www.linkedin.com/in/ming-ruey-chou/",
+   "url_note": "LinkedIn (the director's pointer); mingruey.github.io, the site the lab page links, only redirects to a PDF résumé",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Olga Sergienko",
+   "slug": "olga-sergienko",
+   "groups": [
+    "Princeton AOS"
+   ],
+   "kind": "initials",
+   "note": "added at the director's request: aos.princeton.edu/people/olga-sergienko and gfdl.noaa.gov/olga-sergienko both sit behind a Cloudflare challenge for scripts (403 / 'Just a moment'), so no photo could be fetched under the official-page rule; initials tile until a photo is supplied",
+   "url": "https://aos.princeton.edu/people/olga-sergienko",
+   "url_note": "her AOS people page (the challenge is for scripts, a browser opens it)"
+  },
+  {
+   "name": "Jonas Kloeckner",
+   "slug": "jonas-kloeckner",
+   "groups": [
+    "Coauthors",
+    "Post-doc mentors"
+   ],
+   "kind": "photo",
+   "source_page": "https://mineralx.stanford.edu/people/jonas-kloeckner",
+   "image_url": "https://mineralx.stanford.edu/sites/g/files/sbiybj28096/files/styles/large_square/public/media/image/dscf4182_0.jpg?h=d4a995b8&itok=DGfsEE4h",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Mineral-X people page: \"Postdoctoral Fellow at Stanford Mineral-X\"; Stanford Profiles (jonas-kloeckner): Postdoctoral Scholar, Earth and Planetary Sciences, coauthor of Rines, Yin, Kloeckner, Caers 2026 (Computers & Geosciences). The Profiles photo is a smaller indoor shot",
+   "crop": [
+    0.4,
+    0.32,
+    0.62
+   ],
+   "url": "https://mineralx.stanford.edu/people/jonas-kloeckner",
+   "url_note": "his Mineral-X page (the Web page on his Stanford profile, web.stanford.edu/people/jkloeckn, is 404)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "David Zhen Yin",
+   "slug": "david-zhen-yin",
+   "groups": [
+    "Coauthors"
+   ],
+   "kind": "photo",
+   "source_page": "https://profiles.stanford.edu/david-zhen-yin",
+   "image_url": "https://profiles.stanford.edu/proxy/api/cap/profiles/186848/resources/profilephoto/350x350.1541220937821.jpg",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Stanford Profiles: David Zhen Yin, Senior Research Scientist, Earth & Planetary Sciences; co-founder and program director of Stanford Mineral-X",
+   "crop": [
+    0.52,
+    0.34,
+    0.68
+   ],
+   "url": "https://profiles.stanford.edu/david-zhen-yin",
+   "url_note": "Stanford Profiles (his Mineral-X people page is behind a login; no personal site found)",
+   "url_fetched": "2026-10-03",
+   "file": "zhen-david-yin",
+   "rename_note": "renamed at the director's request: the page keys him as david-zhen-yin; the R2 object keeps its name (immutable store) via `file`"
+  },
+  {
+   "name": "Riley Culberg",
+   "slug": "riley-culberg",
+   "groups": [
+    "Post-doc mentors"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.duffield.cornell.edu/people/riley-culberg/",
+   "image_url": "https://www.duffield.cornell.edu/wp-content/uploads/2024/08/riley-culberg.jpg",
+   "fetched": "2026-10-03",
+   "confidence": "high",
+   "evidence": "Cornell Engineering (Duffield) faculty page: Assistant Professor, Department of Earth and Atmospheric Sciences; Stanford EE PhD 2022 (Schroeder group), Princeton Hess postdoc, Cornell from July 2023. The CHIRP lab People page has a Mt Baker field photo instead",
+   "crop": [
+    0.5,
+    0.45,
+    1.1
+   ],
+   "pad": true,
+   "url": "https://chirp.eas.cornell.edu/",
+   "url_note": "his lab site (CHIRP), the Website field of his Cornell faculty page",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Anna Valerio",
+   "slug": "anna-valerio",
+   "groups": [
+    "Administrative staff"
+   ],
+   "kind": "initials",
+   "source_page": "https://aos.princeton.edu/people/anna-valerio",
+   "image_url": null,
+   "fetched": null,
+   "confidence": "high",
+   "evidence": "Princeton AOS Program Administration page (title 'Anna Valerio | Atmospheric & Oceanic Sciences'): Department and Graduate Administrator, 209 Sayre Hall (also on cimes.princeton.edu/about-us/people/cimes-administration, as CIMES's Department and Graduate Administrator). Neither page carries a photo of her: the AOS staff pages have none, the CIMES listing shows its 'Missing photo icon' placeholder in her slot (Wayback 2026-05-01; aos.princeton.edu and cimes.princeton.edu sit behind a Cloudflare challenge, read via the 2026-05-20 / 2025-12-17 Wayback copies)",
+   "note": "no official photo found on princeton.edu (AOS pages = none, CIMES = the missing-photo placeholder; no geosciences.princeton.edu/people/anna-valerio page in the Wayback index, the live site is behind the Cloudflare challenge); initials tile. If Princeton posts one, set kind=photo + image_url + crop and bake with --only anna-valerio",
+   "url": "https://aos.princeton.edu/people/anna-valerio",
+   "url_note": "her Princeton AOS staff page (no personal site)",
+   "url_fetched": "2026-10-03"
+  },
+  {
+   "name": "Aleksandar Diamond-Stanic",
+   "slug": "aleksandar-diamond-stanic",
+   "groups": [
+    "Earlier advisors"
+   ],
+   "kind": "photo",
+   "source_page": "https://www.bates.edu/physics-astronomy/faculty-profile/aleksandar-m-diamond-stanic/",
+   "image_url": "https://www.bates.edu/faculty/files/2016/10/FDiamondStanicA-419x628.jpg",
+   "fetched": "2026-10-06",
+   "confidence": "high",
+   "evidence": "Bates College Physics and Astronomy faculty profile (title 'Aleksandar M. Diamond-Stanic | Physics and Astronomy | Bates College'): Associate Professor of Physics; the photo is the page's profile image (alt 'Photo of Aleksandar M. Diamond-Stanic', its og:image at 419x628 — the largest size served; the same photo is on bates.edu/faculty-expertise/profile/aleksandar-m-diamond-stanic/)",
+   "crop": [
+    0.5,
+    0.375,
+    1.18
+   ],
+   "pad": true,
+   "prefix": "acks/people_v3",
+   "url": "https://www.bates.edu/physics-astronomy/faculty-profile/aleksandar-m-diamond-stanic/",
+   "url_note": "his Bates Physics and Astronomy faculty profile (the director's undergraduate advisor)",
+   "url_fetched": "2026-10-06"
+  },
+  {
+   "name": "Prof. Hong Lin",
+   "slug": "hong-lin",
+   "groups": [
+    "Earlier advisors"
+   ],
+   "kind": "initials",
+   "note": "added at the director's request, with no profile picture and no link: initials tile, unlinked"
+  },
+  {
+   "name": "Stu",
+   "slug": "stu",
+   "groups": [
+    "Internship mentors"
+   ],
+   "kind": "photo",
+   "note": "the director asked for Stu and Allen by first name only, with no last names and no links; the tile is the LinkedIn profile picture he supplied (raw copy in source_data/acks_faces/, gitignored)",
+   "source_page": "LinkedIn profile picture, supplied by the director",
+   "image_url": "",
+   "fetched": "2026-10-07",
+   "confidence": "high",
+   "evidence": "the director supplied the two LinkedIn profile pictures himself; first names only on the page by request",
+   "crop": [
+    0.4921,
+    0.5245,
+    0.9183
+   ],
+   "pad": true,
+   "prefix": "acks/people_v3",
+   "raw_file": "cinematic/source_data/acks_faces/stu.png",
+   "url_note": "no link, by request (the director asked that neither LinkedIn profile be linked)"
+  },
+  {
+   "name": "Allen",
+   "slug": "allen",
+   "groups": [
+    "Internship mentors"
+   ],
+   "kind": "photo",
+   "note": "the director asked for Stu and Allen by first name only, with no last names and no links; the tile is the LinkedIn profile picture he supplied (raw copy in source_data/acks_faces/, gitignored)",
+   "source_page": "LinkedIn profile picture, supplied by the director",
+   "image_url": "",
+   "fetched": "2026-10-07",
+   "confidence": "high",
+   "evidence": "the director supplied the two LinkedIn profile pictures himself; first names only on the page by request",
+   "crop": [
+    0.4892,
+    0.5121,
+    0.9592
+   ],
+   "pad": true,
+   "prefix": "acks/people_v3",
+   "raw_file": "cinematic/source_data/acks_faces/allen.png",
+   "url_note": "no link, by request (the director asked that neither LinkedIn profile be linked)"
+  }
+ ]
+}

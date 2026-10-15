@@ -1,0 +1,32 @@
+# The union of what the pipelines import, unpinned. Each script's docstring
+# says which subset it needs; most need only numpy/matplotlib/Pillow.
+# Earth Engine (earthengine-api) is needed only by scene_addl/revisit and
+# the velocity-series bakes; torch and scikit-learn only by scene_ch03 and
+# scene_addl/score_tbs_revision.py, which also need the paper's own model
+# package and checkpoint (not in this tree).
+# Not on PyPI: multigrid_sgsim (the bed-ensemble notebooks) and the lakevision
+# model package (scene_ch03) come from the papers' own repositories.
+
+cartopy
+certifi
+earthengine-api
+geopandas
+gstatsim
+gstools
+matplotlib
+netCDF4
+numpy
+pandas
+Pillow
+planetary-computer
+pyproj
+pystac-client
+pyvista
+rasterio
+requests
+scikit-gstat
+scikit-learn
+scipy
+shapely
+torch
+xarray

@@ -1,0 +1,12 @@
+# The labels Worker: the "Label lakes yourself" door's SUBMIT → R2.
+# Deploy (one time): see README.md.
+name = "defense-labels"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+# The site's bucket; the Worker writes only under labels/irr/.
+# Fill in your own R2 bucket name below.
+[[r2_buckets]]
+binding = "LABELS"
+bucket_name = "<bucket>"

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+output/
+output_nl_stack/
+output_lakes/
+output_callouts/
+output_lakes_valid/
+output_irr/
+output_md_candidates/

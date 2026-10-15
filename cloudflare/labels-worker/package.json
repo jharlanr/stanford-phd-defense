@@ -1,0 +1,14 @@
+{
+  "name": "labels-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "test": "esbuild test/csv.test.ts --bundle --platform=node --format=esm --outfile=.wrangler/csv.test.mjs && node .wrangler/csv.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "wrangler": "^4.0.0"
+  }
+}

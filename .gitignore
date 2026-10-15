@@ -1,0 +1,92 @@
+# Defense umbrella repo .gitignore
+#
+# Convention: track source + small/medium derived assets that the
+# website actually uses. Don't track build caches, large source data
+# that lives upstream, or rendered output that's regenerable from
+# committed inputs. Big media (tens of GB of footage and simulation output) goes
+# to Cloudflare R2, never here.
+
+# ───── Python (cinematic/) ─────
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Cinematic preview-render output (regenerable from build scripts).
+cinematic/output/
+cinematic/scene_ch01/output_lakes/
+cinematic/scene_ch02/output_lakes/
+cinematic/scene_ch02/output_simdomains/
+cinematic/scene_ch02/output_results/
+cinematic/scene_addl/output_mgsim/
+cinematic/scene_addl/output_tbs/
+cinematic/scene_addl/output_addl_cards/
+
+# Local copies of private source datasets (populated by
+# cinematic/fetch_sources.sh — originals are never read by pipelines).
+cinematic/source_data/
+
+# ───── Node / Vite (website/, template/) ─────
+website/node_modules
+template/node_modules
+template/dist/
+website/dist/
+website/dist-ssr/
+website/.vite/
+website/*.tsbuildinfo
+*.local
+
+# ───── Editor / OS ─────
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ───── Logs ─────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ───── Throwaway / temp artifacts ─────
+*.bundle
+*.tar.gz
+_silhouette_tmp.png
+_usa_basemap_tmp.png
+.snapshots/
+
+# One-off debug scripts live next to the real tooling but should never
+# be tracked. Convention: leading underscore = throwaway. The real
+# tools (screenshot.mjs, shot-grid.mjs, shot-watch.mjs, inspect.mjs,
+# build_*.py) have no underscore prefix.
+website/tools/_*.mjs
+website/tools/_*.py
+
+# ───── MGSIM bed-ensemble (cinematic/scene_addl/mgsim/; raw radar cache
+# lives in gitignored cinematic/source_data/mgsim/raw/) ─────
+# Raw CReSIS season downloads are re-fetchable via scripts/fetch_radar_lines.py
+# The full-density picks CSV is ~124 MB (regenerable via the fetch script)
+cinematic/scene_addl/mgsim/data/derived/radar_picks_*.csv
+cinematic/scene_addl/mgsim/data/derived/real_cache/
+cinematic/scene_addl/mgsim/data/derived/real_cache_mgpl/
+cinematic/scene_addl/mgsim/data/derived/dems/
+# surface fields extracted from the VM Elmer runs (~15 MB each,
+# re-derivable with scripts/extract_surface_vtu.py)
+cinematic/scene_addl/mgsim/elmer_bundle/results/*.npz
+website/tools/_r*out/
+
+# Claude Code worktrees (.claude/worktrees/<name>) — a full second checkout
+# of this repo lives here while a session works in isolation. It must never
+# be committed: sessions share this checkout's git INDEX, so a stray
+# `git add -A` in the main tree would otherwise swallow an entire worktree.
+.claude/worktrees/

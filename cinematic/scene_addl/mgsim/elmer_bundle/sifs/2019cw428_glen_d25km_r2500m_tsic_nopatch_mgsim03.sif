@@ -1,0 +1,389 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!                                              			        !!
+!! Greenland Lake Trigger Project						!!
+!!   Ching-Yao Lai, Niall B. Coffey, Joshua H. Rines				!!
+!!   Olivier Gagliardini, Fiona Clerc, Eojin Lee, Jamie Hilditch, Laura Stevens !!
+!!                                       					!!
+!! Modified from: Elmer/Ice Courses						!!
+!!    Olivier Gagliardini  May 2011  						!!
+!!                                       					!!
+!! Lake 2019cw428			       					!! 
+!!                                       					!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
+
+check keywords warn
+echo on
+
+! PARAMETERS TO SET MANUALLY EACH RUN
+$ lakenum_cw_str = "428"
+$ domain_km_str = "25"
+
+$ alphadeg_str = 	"0.792"
+$ alphadeg = 	 	 0.792 ![deg]
+$ Hp_str = 		"1004"
+$ Hp = 			 1004 ![m]
+$ Csi = 		 6.5e6  ![Pa s^m L^-m] (3.5e6 fast sliding, 5.5e6 medium sliding, 7.5e6 low sliding)
+$ Csi_str = 		"6.5e6"
+$ patch_nopatch_str = 	"nopatch"
+$ R = 			 2500 ![m] patch radius
+
+! SICOPOLIS temperature profile fit constants
+$ c0 = -1.28
+$ c1 = -1.939
+$ c2 = -143.935
+$ c3 = 201.021
+$ c4 = -66.189
+
+! FILENAMES BASED ON INPUTS:
+$ real_str    = "mgsim03"
+$ bedDEM_path = "dems/2019cw428_bed_d25km_h1004_a0.792_mgsim03.dat"
+$ ZsDEM_path  = "dems/2019cw428_surface_d25km_h1004_a0.792.dat"
+$ out_path = "2019cw" lakenum_cw_str "_d" domain_km_str "km_r2500m_Csi" Csi_str "_Tsic_" patch_nopatch_str "_" real_str "_cauchy.result"
+$ vtu_path = "2019cw" lakenum_cw_str "_d" domain_km_str "km_r2500m_Csi" Csi_str "_Tsic_" patch_nopatch_str "_" real_str "_cauchy.vtu"
+$ meshdb_path = "2019cw" lakenum_cw_str "_d" domain_km_str "km_r2500m"
+
+! Define parameters for material and body force in MPa - a - m
+# yearinsec = 365.25*24*60*60
+$ yearinsec = 365.25*24*60*60
+# rhoi_material = 917.0/(1.0e6*yearinsec^2) 
+# gravity_material = -9.81*yearinsec^2
+# n = 3.0
+# m = 1.0/n
+
+! Prefactors from Cuffey and Paterson (2010) in 
+# A1 = 2.89165e-13*yearinsec*1.0e18  	![MPa^{-3} a^{-1}]
+# A2 = 2.42736e-02*yearinsec*1.0e18  	![MPa^{-3} a^{-1}]
+$ A1si = 2.89165e-13 			![Pa^{-3} s^{-1}]
+$ A2si = 2.42736e-02 			![Pa^{-3} s^{-1}]
+$ Q1 = 60.0e3
+$ Q2 = 115.0e3
+# Q1 = 60.0e3
+# Q2 = 115.0e3
+
+! Rheological parameters for bed (sliding)
+!$ TbotC = c0
+!$ Asi_bed = A2si * exp( -Q2 / (8.314 * (273.15 + TbotC)) ) ! A FACTOR IS SET BY THE BED TEMP
+!$ Csi = (gamma/2/Asi_bed/Hp + ((gamma/2/Asi_bed/Hp)^2+(-2*gamma/9)^3)^(1/2))^(1/3) + (gamma/2/Asi_bed/Hp - ((gamma/2/Asi_bed/Hp)^2+(-2*gamma/9)^3)^(1/2))^(1/3)  ![Pa s^m L^-m]
+
+! Rheological exponents
+$ n = 3.0
+$ m = 1.0/n
+
+! parameters for slippery patch
+$ Lx = 24750.0 		![m]
+$ xc = Lx/2           	![m] patch center x
+$ yc = Lx/2            	![m] patch center y
+$ C_out = Csi*yearinsec^(-m)/1e6  ! C value outside patch [MPa (m/yr)^-m]
+$ C_in = 0.0      	! C value inside patch (0 for shear-free)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Header
+  Mesh DB "." $meshdb_path
+End
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Constants
+  c0	= Real $c0
+  c1	= Real $c1
+  c2	= Real $c2
+  c3	= Real $c3
+  c4	= Real $c4
+  A1si	= Real $A1si
+  A2si 	= Real $A2si
+  Q1	= Real $Q1
+  Q2	= Real $Q2
+  yearinsec = Real $yearinsec
+  alpha_deg = Real $alphadeg
+  Hglob	= Real $Hp
+  n	= Real $n
+  m	= Real $m
+  rhoi	= Real 917.0
+  g	= Real -9.81
+  !gamma	= Real $gamma
+  Csi	= Real $Csi
+  !Asi_bed = Real $Asi_bed
+  Cb	= Real $C_out
+  xc	= Real $xc
+  yc 	= Real $yc
+  R	= Real $R
+End
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Simulation
+  Coordinate System  =  Cartesian 3D 
+  Simulation Type = Steady        
+
+  Extruded Mesh Levels = Integer 10
+
+  Steady State Min Iterations = 1
+  Steady State Max Iterations = 1
+
+  Post File   = File $vtu_path
+
+  max output level = 3 
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! The ice 
+Body 1
+  Equation = 1
+  Body Force = 1
+  Material = 1
+  Initial Condition = 1
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Initial Condition 1
+  Pressure = Real 0.0 
+  Velocity 1 = Real 0.0 
+  Velocity 2 = Real 0.0 
+  Velocity 3 = Real 0.0 
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Body Force 1
+  Flow BodyForce 1 = Real 0.0                          
+  Flow BodyForce 2 = Real 0.0
+  Flow BodyForce 3 = Real #gravity_material
+  mytemp = Variable Coordinate 3, ZsDEM, bedDEM
+    Real Procedure "PROG/USF_TAVz" "Tprof_sicopolis"
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Material 1
+! Glen's flow law (using Glen)
+!-----------------
+! viscosity stuff
+!----------------
+  Density = Real #rhoi_material
+  Viscosity Model = String "Glen"
+  Viscosity = Real 1.0 ! To avoid warning output 
+  Glen Exponent = Real #n
+  Limit Temperature = Real -10.0
+  Rate Factor 1 = Real #A1
+  Rate Factor 2 = Real #A2
+  Activation Energy 1 = Real #Q1
+  Activation Energy 2 = Real #Q2
+  Glen Enhancement Factor = Real 1.0
+  Critical Shear Rate = Real 1.0e-10
+  Constant Temperature = Variable Coordinate 3, ZsDEM, bedDEM
+    Real Procedure "PROG/USF_TAVz" "Tprof_sicopolis"
+  Cauchy = Logical True
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Solver 1
+  Exec Solver = "Before Simulation"
+  Equation = "Read DEMs"
+  Procedure = "ElmerIceSolvers" "Grid2DInterpolator"
+
+  ! Bed
+  Variable 1 = String "bedDEM"
+  Variable 1 data file = File $bedDEM_path
+  Variable 1 x0 = Real 0.0
+  Variable 1 y0 = Real 0.0
+  Variable 1 lx = Real 24750.0
+  Variable 1 ly = Real 24750.0
+  Variable 1 Nx = Integer 166
+  Variable 1 Ny = Integer 166
+  Variable 1 Invert = Logical False
+  Variable 1 Fill = Logical False
+  Variable 1 Position Tol = Real 1.0e-1
+
+  ! Surface
+  Variable 2 = String "ZsDEM"
+  Variable 2 data file = File $ZsDEM_path
+  Variable 2 x0 = Real 0.0
+  Variable 2 y0 = Real 0.0
+  Variable 2 lx = Real 24750.0
+  Variable 2 ly = Real 24750.0
+  Variable 2 Nx = Integer 166
+  Variable 2 Ny = Integer 166
+  Variable 2 Invert = Logical False
+  Variable 2 Fill = Logical False
+  Variable 2 Position Tol = Real 1.0e-1
+
+End
+
+
+Solver 2  
+  Equation = "MapCoordinate"
+  Procedure = "StructuredMeshMapper" "StructuredMeshMapper"
+
+  Active Coordinate = Integer 3
+  Mesh Velocity Variable = String "dSdt"
+  Mesh Update Variable = String "dS"
+  Mesh Velocity First Zero = Logical True
+
+  Displacement Mode = Logical False
+  Correct Surface = Logical True
+  Minimum Height = Real 1.0
+End
+
+
+Solver 3
+  Equation = "Navier-Stokes"
+  
+  Stabilization Method = String Stabilized
+  Flow Model = Stokes
+
+  Exported Variable 1 = -dofs 1 "dSdt" 
+  Exported Variable 2 = -dofs 1 "dS" 
+  Exported Variable 3 = -dofs 1 "BedDEM"
+  Exported Variable 4 = -dofs 1 "ZsDEM"
+
+  Linear System Solver = Iterative      
+  Linear System Iterative Method = BICGStab
+   
+  Linear System Preconditioning = ILU0
+  Linear System Convergence Tolerance = Real 1.0e-8
+  !Linear System Convergence Tolerance = Real 1.0e1
+  Linear System Max Iterations = 2000
+  Linear System Residual Output = 500
+  !Linear System Abort Not Converged = True 
+  Linear System Abort Not Converged = False
+
+  Nonlinear System Max Iterations = 100
+  !Nonlinear System Max Iterations = 5
+  Nonlinear System Convergence Tolerance  = 5.0e-6
+  Nonlinear System Newton After Iterations = 5
+  Nonlinear System Newton After Tolerance = 1.0e-02
+  Nonlinear System Relaxation Factor = 1.00
+
+  Steady State Convergence Tolerance = Real 1.0e-3
+End
+
+Solver 4
+  Equation = "Sij"
+  Procedure = "ElmerIceSolvers" "ComputeDevStress"          
+  Variable = -nooutput "Sij"
+  Variable DOFs = 1
+  Exported Variable 1 = -dofs 6 "Stress"
+  Stress Variable Name = String "Stress"
+  Flow Solver Name = String "Flow Solution"
+  !Linear System Solver = Direct  
+  !Linear System Direct Method = umfpack
+  Linear System Solver = Iterative       
+  Linear System Iterative Method = BiCGStab
+  Linear System Preconditioning = Diagonal
+  Linear System Convergence Tolerance = 1e-8
+  Linear System Max Iterations = 1000
+End
+
+Solver 5
+  Equation = "EigenStresses"
+  Procedure = "ElmerIceSolvers" "ComputeEigenValues"
+  Variable = -nooutput dumy
+  Variable DOFs = 1
+
+  Tensor Variable Name = String "Stress" 
+  
+  ! The 3 eigenvalues
+  Exported Variable 1 = EigenStress
+  Exported Variable 1 DOFS = 3
+
+  ! The 3 eigenvectors (Option)
+  Exported Variable 2 = EigenVector1
+  Exported Variable 2 DOFS = 3
+  Exported Variable 3 = EigenVector2
+  Exported Variable 3 DOFS =  3
+  Exported Variable 4 = EigenVector3
+  Exported Variable 4 DOFS = 3
+End
+
+Solver 6
+  Exec Solver = "Before Simulation"
+  Equation  = "Normal Vector"
+  Procedure = "ElmerIceSolvers" "ComputeNormalSolver"
+  Variable  = -dofs 3 "Normal Vector"
+  ComputeAll = Logical False
+End
+
+Solver 7
+   Equation = "UpdateExport"
+   Procedure = File "ElmerIceSolvers" "UpdateExport"
+   Variable = -nooutput "dumy"
+
+   Exported Variable 1 = -dofs 1 "mytemp"
+   !Exported Variable 2 = 
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Equation 1
+  Active Solvers(7) = 1 2 3 4 5 6 7
+End
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! =========================
+! LATERAL WALLS (IDs 1–4)
+! =========================
+! Use Normal–Tangential form so you don’t care which global axis is normal.
+
+!! "SOUTH" wall (y = 0)  -> ID 1
+Boundary Condition 1
+  Target Boundaries = 1
+  Velocity 2 = Real 0.0         ! no penetration in y-direction
+End
+
+!! "EAST" wall (x = Lx) -> ID 2
+Boundary Condition 2
+  Name = "east_outflow"
+  Target Boundaries = 2
+  Velocity 1 = Variable Coordinate 3, ZsDEM, bedDEM
+    Real Procedure "PROG/USF_TAVz" "BC_SIA_Tsicopolis"
+End
+
+!! "NORTH wall" (y = 1000) -> ID 3
+Boundary Condition 3
+  Target Boundaries = 3
+  Normal-Tangential Velocity = Logical False
+  Velocity 2 = Real 0.0         ! no penetration in y-direction
+End
+
+
+!! "WEST wall" (x = 0) -> ID 4
+Boundary Condition 4
+  Name = "west_inflow"
+  Target Boundaries = 4
+  Velocity 1 = Variable Coordinate 3, ZsDEM, bedDEM
+    Real Procedure "PROG/USF_TAVz" "BC_SIA_Tsicopolis"
+End
+
+
+! =========================
+! BED (BOTTOM SURFACE)
+! =========================
+! Keep your existing choice: no-slip OR sliding (comment the other).
+
+Boundary Condition 5
+  Bottom Surface = Equals bedDEM
+  
+  ComputeNormal = Logical True
+  Normal-Tangential Velocity = Logical True
+  
+  ! impermeable bed
+  Velocity 1 = Real 0.0
+  
+  Slip Coefficient 2 =  Variable Coordinate 1
+    Real Procedure "ElmerIceUSF" "Sliding_Weertman"
+  Slip Coefficient 3 = Variable Coordinate 1
+    Real Procedure "ElmerIceUSF" "Sliding_Weertman"
+
+  Weertman Exponent = Real #m
+  Weertman Linear Velocity = Real 1.0e-4
+  Weertman Friction Coefficient = Variable Coordinate 1, Coordinate 2
+    Real MATC "C_out"
+    !Real Procedure "../../PROG/USF_slippatch" "SlipPatch"
+
+End
+
+
+! =========================
+! TOP (UPPER SURFACE)
+! =========================
+Boundary Condition 6
+  Top Surface = Equals ZsDEM
+End
+

@@ -1,0 +1,17 @@
+{
+  "_comment": "Surface-speed colour scale for the Introduction's 'Greenland flows' step. ONE source of truth: cinematic/scene_01_intro/build_flow_trails.py colours the drape from these stops, website/src/config/velocityScale.ts colours the colorbar (and places its ticks) with the same log mapping. Stops are [fraction of the log10 range vmin..vmax, hex]; sampled from NASA SVS 3848's ice_velocity_scale.png (Rignot et al., log 1-3000 m/yr). Editing this file means re-running the builder and uploading the drape under a NEW name.",
+  "vmin": 1,
+  "vmax": 3000,
+  "stops": [
+    [0.0, "#ffa7a6"],
+    [0.177, "#fff7a2"],
+    [0.339, "#98ff92"],
+    [0.5, "#5bfcfb"],
+    [0.597, "#0463ff"],
+    [0.661, "#0300ff"],
+    [0.79, "#d500ff"],
+    [0.855, "#ff00ba"],
+    [0.984, "#ff0000"],
+    [1.0, "#ff0000"]
+  ]
+}

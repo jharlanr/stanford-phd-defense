@@ -1,0 +1,5 @@
+# Block all crawlers from indexing the site. Remove this file (or update
+# it to `User-agent: *\nAllow: /`) once the site is meant to be publicly
+# indexed; the matching <meta name="robots"> tag lives in index.html.
+User-agent: *
+Disallow: /

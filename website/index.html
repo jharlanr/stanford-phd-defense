@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script type="text/javascript">
+      // GitHub Pages SPA fallback (decoder). Pairs with public/404.html.
+      // When 404.html redirects with the original path encoded as a
+      // query string (e.g. /?/chapter1), restore the real path here
+      // before vue-router boots.
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) { return s.replace(/~and~/g, '&') })
+            .join('?');
+          window.history.replaceState(
+            null, '',
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Keep the site out of search engines while it is not meant to be
+         indexed; remove this tag to open it up. Belt-and-suspenders with
+         public/robots.txt. -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <title>Greenland Supraglacial Lake Drainage Events</title>
+    <meta
+      name="description"
+      content="Interactive companion to Josh Rines' PhD defense — Stanford Geophysics, October 9 2026"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=EB+Garamond:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
