@@ -203,20 +203,33 @@ watch(
   { immediate: true },
 )
 
-// the print mode hides the site's chrome (ribbon + pills) through a body class
+// The site's ribbon (the chapter menu) is hidden for the whole page — the
+// director's call (2026-11-21 night): this is the conference's page, not a
+// part of the defense; "← deeper dive" is the way back, and the ribbon
+// returns with it. The print mode hides the pills too. Both through body
+// classes (the chrome is Explore's).
 onMounted(() => {
+  document.body.classList.add('dfd-body')
   if (print.value) document.body.classList.add('dfd-print-body')
 })
 onBeforeUnmount(() => {
   if (hideTimer !== null) window.clearTimeout(hideTimer)
-  document.body.classList.remove('dfd-print-body')
+  document.body.classList.remove('dfd-body', 'dfd-print-body')
   emit('nav-state', { next: false, back: false })
 })
 </script>
 
 <style>
-/* the export: no ribbon, no pills (global — the chrome is Explore's) */
-body.dfd-print-body .top-nav,
+/* the page: no ribbon (the chapter menu and its sub-menu); the BACK / NEXT
+   pills ride the top row at every width (the ribbon that pushed them down
+   on narrower windows is gone). Global — the chrome is Explore's. */
+body.dfd-body .top-nav-wrap {
+  display: none !important;
+}
+body.dfd-body .beat-nav {
+  top: calc(1.2vh + (var(--nav-h) - var(--lm-h)) / 2) !important;
+}
+/* the export: no pills either */
 body.dfd-print-body .beat-nav {
   display: none !important;
 }
@@ -232,7 +245,8 @@ body.dfd-print-body .beat-nav {
   color: #f5f0e6;
   font-family: 'Inter', system-ui, sans-serif;
   pointer-events: auto;
-  --dfd-top: calc(1.2vh + var(--nav-h, 2.92rem) + 1rem);
+  /* the rail sits where the ribbon was, centred on its row like the pills */
+  --dfd-top: calc(1.2vh + (var(--nav-h, 2.92rem) - var(--dfd-rail-h)) / 2);
   --dfd-rail-h: 2.4rem;
 }
 .dfd-print {
@@ -240,7 +254,7 @@ body.dfd-print-body .beat-nav {
   --dfd-rail-h: 0px;
 }
 
-/* ── the rail under the ribbon ── */
+/* ── the rail in the ribbon's row ── */
 .dfd-rail {
   position: absolute;
   top: var(--dfd-top);
