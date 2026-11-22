@@ -2,7 +2,7 @@
 // LaTeX (latex + dvisvgm, Computer Modern)  for the APS DFD 2026
 // page (SectionDfd.vue — the shallow-stream theory: governing equations,
 // the 1-D and 2-D stress solutions, symbols and readouts),
-// served from the media bucket at dfd/eq_v1/<name>.svg. Sizes in bp;
+// served from the media bucket at dfd/eq_v2/<name>.svg. Sizes in bp;
 // base = image top → baseline.
 export interface DfdEqBox { w: number; h: number; base: number }
 export const DFD_EQ: Record<string, DfdEqBox> = {
@@ -20,9 +20,9 @@ export const DFD_EQ: Record<string, DfdEqBox> = {
   def_dz: { w: 132.099, h: 12.925, base: 9.488 }, // divergence and vorticity of the velocity perturbation
   def_k0: { w: 57.669, h: 27.309, base: 15.918 }, // the inverse decay length; PNAS SI text before Eq. 34
   def_lambda: { w: 96.228, h: 11.856, base: 8.418 }, // PNAS SI Eq. 22 and text after Eq. 34
-  def_gamma: { w: 42.258, h: 25.319, base: 15.048 }, // the sweep's sliding parameter; c_b = 2 eta gamma / H
-  def_decay_gamma: { w: 55.486, h: 27.309, base: 16.983 }, // the decay length in terms of gamma
-  scales: { w: 165.561, h: 27.309, base: 17.398 }, // PNAS Eq. scales
+  def_ssa_ratio: { w: 169.824, h: 25.319, base: 15.048 }, // the SSA's assumption as the PNAS main text states it, and the value it chose
+  sym_ssa_ratio: { w: 30.604, h: 12.963, base: 8.972 }, // symbol: the SSA ratio
+  scales: { w: 274.919, h: 16.237, base: 11.301 }, // PNAS Eq. scales, in its words
   scale_stress: { w: 35.334, h: 14.852, base: 9.917 }, // stress scale
   scale_decay: { w: 45.548, h: 15.354, base: 11.301 }, // decay length
   assum_shallow: { w: 103.790, h: 12.963, base: 8.972 }, // the shallow-stream assumption
@@ -36,7 +36,8 @@ export const DFD_EQ: Record<string, DfdEqBox> = {
   lab_l: { w: 33.057, h: 9.918, base: 8.418 }, // the patch length in the 1-D paper's notation
   s1_jog: { w: 167.822, h: 54.009, base: 29.495 }, // JOG Eq. 42 as published, any n; x from the upstream edge
   s1_jog_x: { w: 307.104, h: 29.270, base: 18.305 }, // JOG Eq. 14 mapped to the 2-D notation
-  s2_lhs: { w: 85.352, h: 26.778, base: 14.522 }, // 2-D solution, rr left-hand side (PNAS SI Eq. 34a)
+  s2_lhs: { w: 64.968, h: 11.413, base: 8.418 }, // 2-D solution, rr left-hand side (PNAS SI Eq. 34a rescaled)
+  def_nd: { w: 177.748, h: 26.778, base: 14.522 }, // PNAS SI text before the rescaled components: the dimensionless stress, radius and patch size
   s2_in: { w: 77.735, h: 23.227, base: 14.893 }, // inside the patch
   s2_out_a: { w: 70.845, h: 26.536, base: 15.712 }, // outside: the divergence mode, decay length 1/k0
   s2_out_b: { w: 81.863, h: 26.536, base: 15.712 }, // outside: the vorticity mode, decay length 1/(2 k0)
@@ -52,24 +53,20 @@ export const DFD_EQ: Record<string, DfdEqBox> = {
   bessel_k1pp: { w: 157.228, h: 24.046, base: 15.712 }, // the identity the rr solution uses (from the order-1 equation and K_1' = -K_0 - K_1/x)
   bessel_ax: { w: 30.327, h: 12.963, base: 8.972 }, // the Bessel panel's y-axis
   bessel_exp: { w: 18.881, h: 11.431, base: 9.931 }, // the Bessel panel's reference curve
-  slide_s2: { w: 265.040, h: 54.196, base: 29.589 }, // PNAS SI Eq. 34a whole, for the flash slide
-  slide_defs: { w: 202.655, h: 14.852, base: 9.917 }, // the slide's definitions line: the scaled radius, the one shape parameter, the two mode amplitudes
+  slide_s2: { w: 244.656, h: 54.196, base: 29.589 }, // PNAS SI Eq. 34a whole, for the flash slide
+  slide_defs: { w: 273.472, h: 14.955, base: 9.968 }, // the slide's definitions line: the dimensionless stress, the scaled radius, the one shape parameter, the two mode amplitudes
   s2_asym: { w: 130.782, h: 27.309, base: 16.886 }, // why the far field decays exponentially
-  s2_tt: { w: 258.347, h: 52.204, base: 28.593 }, // PNAS SI Eq. 34c
-  s2_rt: { w: 322.867, h: 52.204, base: 28.593 }, // PNAS SI Eq. 34b
+  s2_tt: { w: 238.154, h: 52.204, base: 28.593 }, // PNAS SI Eq. 34c
+  s2_rt: { w: 302.578, h: 52.204, base: 28.593 }, // PNAS SI Eq. 34b
   s2_cauchy: { w: 263.712, h: 11.745, base: 8.308 }, // PNAS SI text before Eq. 35
   sym_H: { w: 12.091, h: 9.808, base: 8.308 }, // symbol: ice thickness
   sym_alpha: { w: 9.410, h: 7.289, base: 5.789 }, // symbol: surface slope
-  sym_gamma: { w: 8.711, h: 9.227, base: 5.789 }, // symbol: the sweep's sliding parameter
   sym_R: { w: 10.641, h: 9.808, base: 8.308 }, // symbol: patch radius
   sym_eta: { w: 8.304, h: 9.227, base: 5.789 }, // symbol: viscosity
   sym_c0: { w: 11.781, h: 8.784, base: 5.789 }, // symbol: basal drag coefficient
   sym_lambda: { w: 8.812, h: 9.918, base: 8.418 }, // symbol: lambda = k0 R
   sym_k0inv: { w: 22.619, h: 12.963, base: 8.972 }, // symbol: the decay length
-  sym_tau_scale: { w: 14.018, h: 12.963, base: 8.972 }, // symbol: the stress scale
+  sym_tau_scale: { w: 33.674, h: 14.852, base: 9.917 }, // the stress scale, written out (the paper names no symbol for it)
   lab_1d: { w: 43.871, h: 12.963, base: 8.972 }, // curve label: the 1-D solution
   lab_2d: { w: 74.594, h: 12.963, base: 8.972 }, // curve label: the 2-D solution along the flow line
-  err_def: { w: 121.612, h: 30.087, base: 17.534 }, // the validity metric, from the sweep manifest's max_kpa
-  ax_RH: { w: 24.714, h: 12.963, base: 8.972 }, // validity-map axis: patch radius over thickness
-  ax_LH: { w: 63.058, h: 24.488, base: 14.660 }, // validity-map axis: decay length over thickness
 }

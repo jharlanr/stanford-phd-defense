@@ -108,7 +108,7 @@ export const DFD_SITE_URL = 'jharlanr.github.io/stanford-phd-defense/additional-
 export const DFD_LOGO_KEY = 'dfd/aps_dfd_2026_dark.svg'
 
 /** The page's LaTeX (cinematic/scene_addl/build_dfd_eqs.py → config/dfdEqs.ts sizes). */
-export const DFD_EQ_PREFIX = 'dfd/eq_v1/'
+export const DFD_EQ_PREFIX = 'dfd/eq_v2/'
 export function dfdEqUrl(name: string): string {
   return mediaUrl(`${DFD_EQ_PREFIX}${name}.svg`)
 }

@@ -116,8 +116,7 @@
         </g>
       </svg>
       <figcaption class="md-caption">
-        <DfdEq name="def_gamma" :k="K" />
-        <DfdEq name="def_decay_gamma" :k="K" />
+        <DfdEq name="def_ssa_ratio" :k="K" />
       </figcaption>
     </figure>
   </div>

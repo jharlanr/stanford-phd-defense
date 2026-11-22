@@ -196,12 +196,12 @@ const P1 = {
   x: { name: 's1_jog_x', k: KD, pair: 'decay', label: 'the decay length: stiffer (η), thicker (H) ice reaches farther; stronger traction (c₀) shortens the reach' },
 }
 const P2 = {
-  lhs: { name: 's2_lhs', k: KE, pair: 'scale', label: 'the same stress scale ½ρgαR; cos θ makes it a dipole — tension upstream (θ = π), compression downstream' },
-  inn: { name: 's2_in', k: KE, pair: 'inner', label: 'the same ramp, lightened by 1 − fδ/4 (0.81–0.87): the ring of ice around the patch carries part of the load as hoop and shear stress' },
-  outA: { name: 's2_out_a', k: KE, pair: 'outer', label: 'the stretching mode (the divergence δ): K₁″(r̃) ~ e^(−r̃) — exponential decay over 1/k₀, as in 1-D' },
-  outB: { name: 's2_out_b', k: KE, pair: 'outer2', label: 'the shearing mode (the vorticity ζ), which has no 1-D analogue: K₂(2r̃) ~ e^(−2r̃), decaying twice as fast' },
-  lam: { name: 'def_lambda', k: KD, pair: 'decay', label: 'λ = R/[x]: the patch radius in decay lengths — the one parameter that sets the shape' },
-  fd: { name: 's2_fd', k: KD * 0.92, pair: 'split', label: 'how the patch’s load splits between stretching (fδ) and shearing (fζ = 4 − 4fδ); fδ runs 0.5 → 0.8 as λ → 0 → ∞' },
+  lhs: { name: 's2_lhs', k: KE, pair: 'scale', label: 'τ̃rr ≡ τ̄rr / (½ρgαR), the same stress scale as 1-D; cos θ makes it a dipole — tension upstream (θ = π), compression downstream' },
+  inn: { name: 's2_in', k: KE, pair: 'inner', label: 'the same linear ramp, lighter by the factor 1 − fδ/4 (0.80–0.875): a disc has flanks, and the dragged ice beside it carries part of the lost basal drag through lateral shear' },
+  outA: { name: 's2_out_a', k: KE, pair: 'outer', label: 'the divergence mode (δ = ∇·u′, stretching along the flow, resisted with the membrane stiffness 4ηH): K₁″(r̃) ~ e^(−r̃), decaying over 1/k₀ exactly as in 1-D' },
+  outB: { name: 's2_out_b', k: KE, pair: 'outer2', label: 'the vorticity mode (ζ = ẑ·∇×u′, lateral shear against the flanks, resisted with the shear stiffness ηH — a quarter of 4ηH, so the decay rate doubles): K₂(2r̃) ~ e^(−2r̃); it has no 1-D analogue' },
+  lam: { name: 'def_nd', k: KD * 0.92, pair: 'decay', label: 'the paper’s dimensionless variables: stress in units of ½ρgαR, lengths in decay lengths 1/k₀; λ = k₀R, the patch radius in decay lengths, is the one parameter that sets the shape' },
+  fd: { name: 's2_fd', k: KD * 0.92, pair: 'split', label: 'inside the patch the lost basal drag is carried by the two modes together (SI: 4δ₀ − ζ₀ = −ρgαR/η, i.e. fδ + fζ/4 = 1): fδ is the divergence mode’s share, 1 − fδ the vorticity mode’s. Set by the matching at r = R, it depends on λ alone: ½ for a small patch (λ → 0), 0.57 at the paper’s λ = 0.56, 0.8 for a large one (λ → ∞). In 1-D there are no flanks: fδ = 1' },
 }
 </script>
 

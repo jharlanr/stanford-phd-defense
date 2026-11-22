@@ -14,8 +14,13 @@ Four groups:
     (PNAS Eq. SSA) and the 1-D SSA (Rines et al. 2026 Eq. 7, n = 1) split
     into membrane / basal-drag / driving-stress pieces, the modified
     Helmholtz equations for the perturbation's divergence and vorticity
-    (SI Eqs. kg-delta, kg-zeta), the definitions k0, lambda, gamma, the
-    stress and length scales (PNAS Eq. scales) and the shallow assumption.
+    (SI Eqs. kg-delta, kg-zeta), the definitions k0, lambda, the SSA
+    ratio c0 H / eta, the stress and length scales (PNAS Eq. scales) and
+    the shallow assumption. NOTATION IS THE PAPER'S (the director, 2026-11-21
+    night: "they should be the same notation"): tau~_ij = tau_ij / (rho g
+    alpha R / 2), r~ = k0 r, lambda = k0 R, f_delta, f_zeta, c0 — no [tau],
+    no [x], no gamma on screen (gamma = c0 H / 2 eta is the sweep's internal
+    parameter, the thesis's, not the PNAS paper's).
   * the 1-D SOLUTION (Rines et al. 2026 Eq. 42 with n = 1, patch length
     l = 2R, x from the patch centre): the three rows as separate pieces
     with their x-range conditions, plus the equation as published.
@@ -24,16 +29,15 @@ Four groups:
     the mode amplitudes f_delta, f_zeta (SI Eqs. delta_0, zeta_0), the
     Bessel asymptote and the Cauchy-stress combinations (SI text before
     Eq. 35).
-  * SYMBOLS and readouts: the sweep's parameters, the curve labels, the
-    validity metric and the axis titles of the validity map.
+  * SYMBOLS and readouts: the paper's parameters and the curve labels.
 
 Outputs:
-  cinematic/data/eq_dfd/<name>.svg       (upload to R2 dfd/eq_v1/)
-  website/.r2-cache/dfd/eq_v1/<name>.svg (the dev server's local mirror)
+  cinematic/data/eq_dfd/<name>.svg       (upload to R2 dfd/eq_v2/)
+  website/.r2-cache/dfd/eq_v2/<name>.svg (the dev server's local mirror)
   website/src/config/dfdEqs.ts           (sizes in bp, committed)
 
 Run:  python3 -I cinematic/scene_addl/build_dfd_eqs.py
-Then: rclone copy cinematic/data/eq_dfd r2:<bucket>/dfd/eq_v1 --header-upload 'Cache-Control: public, max-age=31536000, immutable'
+Then: rclone copy cinematic/data/eq_dfd r2:<bucket>/dfd/eq_v2 --header-upload 'Cache-Control: public, max-age=31536000, immutable'
       (the website/.r2-cache mirror is written by this script)
 Needs /Library/TeX/texbin (latex, dvisvgm).
 """
@@ -49,7 +53,7 @@ sys.path.insert(0, str(ROOT / "cinematic" / "scene_ch01"))
 import build_theory_eqs as bte  # noqa: E402
 
 OUT = ROOT / "cinematic" / "data" / "eq_dfd"
-R2_CACHE = ROOT / "website" / ".r2-cache" / "dfd" / "eq_v1"
+R2_CACHE = ROOT / "website" / ".r2-cache" / "dfd" / "eq_v2"
 TS_OUT = ROOT / "website" / "src" / "config" / "dfdEqs.ts"
 
 SI = "PNAS SI"
@@ -79,9 +83,9 @@ EQS = {
                "divergence and vorticity of the velocity perturbation"),
     "def_k0": (r"k_0 \equiv \sqrt{\frac{c_0}{4\eta H}}", f"the inverse decay length; {SI} text before Eq. 34"),
     "def_lambda": (r"\lambda \equiv k_0 R,\qquad \tilde r \equiv k_0 r", f"{SI} Eq. 22 and text after Eq. 34"),
-    "def_gamma": (r"\gamma \equiv \frac{c_0 H}{2\eta}", "the sweep's sliding parameter; c_b = 2 eta gamma / H"),
-    "def_decay_gamma": (r"\frac{1}{k_0} = H\sqrt{\frac{2}{\gamma}}", "the decay length in terms of gamma"),
-    "scales": (r"[\tau] = \tfrac12\,\rho g\alpha R,\qquad [x] = \frac{1}{k_0} = \sqrt{\frac{4\eta H}{c_0}}", "PNAS Eq. scales"),
+    "def_ssa_ratio": (r"\frac{c_0 H}{\eta} \ll 1\qquad (0.2\ \text{in the paper's runs})", "the SSA's assumption as the PNAS main text states it, and the value it chose"),
+    "sym_ssa_ratio": (r"c_0 H/\eta", "symbol: the SSA ratio"),
+    "scales": (r"\text{stress scale }\ \tfrac12\,\rho g\alpha R,\qquad \text{decay length scale }\ \sqrt{4\eta H/c_0} = 1/k_0", "PNAS Eq. scales, in its words"),
     "scale_stress": (r"\tfrac12\,\rho g\alpha R", "stress scale"),
     "scale_decay": (r"\sqrt{4\eta H/c_0}", "decay length"),
     "assum_shallow": (r"H \ll R,\qquad H \ll 1/k_0", "the shallow-stream assumption"),
@@ -99,7 +103,8 @@ EQS = {
     "s1_jog_x": (r"[x] = \left(\frac{2Bh}{C}\right)^{\!\frac{n}{n+1}}\!,\qquad n = 1,\ B = 2\eta,\ C = c_0\ \Rightarrow\ [x] = \sqrt{\frac{4\eta H}{c_0}} = \frac{1}{k_0}",
                  "JOG Eq. 14 mapped to the 2-D notation"),
     # ── the 2-D solution (PNAS SI Eq. 34): rr split into highlightable pieces, the other two whole ──
-    "s2_lhs": (r"\frac{\overline{\tau}_{rr}}{\tfrac12\rho g\alpha R}\;=\;\cos\theta\;\times", f"2-D solution, rr left-hand side ({SI} Eq. 34a)"),
+    "s2_lhs": (r"\tilde{\tau}_{rr}\;=\;\cos\theta\;\times", f"2-D solution, rr left-hand side ({SI} Eq. 34a rescaled)"),
+    "def_nd": (r"\tilde{\tau}_{ij} \equiv \frac{\overline{\tau}_{ij}}{\tfrac12\rho g\alpha R},\qquad \tilde r \equiv k_0 r,\qquad \lambda \equiv k_0 R", f"{SI} text before the rescaled components: the dimensionless stress, radius and patch size"),
     "s2_in": (r"-\left(1 - \tfrac14 f_\delta(\lambda)\right)\frac{\tilde r}{\lambda}", "inside the patch"),
     "s2_out_a": (r"-\;\frac{f_\delta(\lambda)}{K_1(\lambda)}\,K_1''(\tilde r)", "outside: the divergence mode, decay length 1/k0"),
     "s2_out_b": (r"+\;\frac{f_\zeta(\lambda)}{K_1(2\lambda)}\,\frac{K_2(2\tilde r)}{2\tilde r}", "outside: the vorticity mode, decay length 1/(2 k0)"),
@@ -125,33 +130,28 @@ EQS = {
     "bessel_ax": (r"K_n(x)", "the Bessel panel's y-axis"),
     "bessel_exp": (r"e^{-x}", "the Bessel panel's reference curve"),
     # ── the FLASH SLIDE's one equation: the rr solution whole (the pieces above, in one display) ──
-    "slide_s2": (r"\frac{\overline{\tau}_{rr}}{\tfrac12\rho g\alpha R} = \cos\theta \begin{cases} -\left(1 - \tfrac14 f_\delta\right)\dfrac{\tilde r}{\lambda}, & r < R \\[10pt] -\dfrac{f_\delta}{K_1(\lambda)}\,K_1''(\tilde r) + \dfrac{f_\zeta}{K_1(2\lambda)}\,\dfrac{K_2(2\tilde r)}{2\tilde r}, & r > R \end{cases}",
+    "slide_s2": (r"\tilde{\tau}_{rr} = \cos\theta \begin{cases} -\left(1 - \tfrac14 f_\delta\right)\dfrac{\tilde r}{\lambda}, & r < R \\[10pt] -\dfrac{f_\delta}{K_1(\lambda)}\,K_1''(\tilde r) + \dfrac{f_\zeta}{K_1(2\lambda)}\,\dfrac{K_2(2\tilde r)}{2\tilde r}, & r > R \end{cases}",
                  f"{SI} Eq. 34a whole, for the flash slide"),
-    "slide_defs": (r"\tilde r = k_0 r,\qquad \lambda = k_0 R,\qquad f_\delta(\lambda) + \tfrac14 f_\zeta(\lambda) = 1",
-                   "the slide's definitions line: the scaled radius, the one shape parameter, the two mode amplitudes"),
+    "slide_defs": (r"\tilde{\tau}_{ij} \equiv \overline{\tau}_{ij}\big/\tfrac12\rho g\alpha R,\qquad \tilde r \equiv k_0 r,\qquad \lambda \equiv k_0 R,\qquad f_\delta + \tfrac14 f_\zeta = 1",
+                   "the slide's definitions line: the dimensionless stress, the scaled radius, the one shape parameter, the two mode amplitudes"),
     "s2_asym": (r"K_n(\tilde r) \sim \sqrt{\frac{\pi}{2\tilde r}}\;e^{-\tilde r}\quad (\tilde r \to \infty)", "why the far field decays exponentially"),
-    "s2_tt": (r"\frac{\overline{\tau}_{\theta\theta}}{\tfrac12\rho g\alpha R} = \cos\theta \begin{cases} \left(1 - \tfrac54 f_\delta\right)\dfrac{\tilde r}{\lambda}, & r < R \\[8pt] \dfrac{f_\delta}{K_1(\lambda)}\,\dfrac{K_2(\tilde r)}{\tilde r} - \dfrac{f_\zeta}{K_1(2\lambda)}\,\dfrac{K_2(2\tilde r)}{2\tilde r}, & r > R \end{cases}",
+    "s2_tt": (r"\tilde{\tau}_{\theta\theta} = \cos\theta \begin{cases} \left(1 - \tfrac54 f_\delta\right)\dfrac{\tilde r}{\lambda}, & r < R \\[8pt] \dfrac{f_\delta}{K_1(\lambda)}\,\dfrac{K_2(\tilde r)}{\tilde r} - \dfrac{f_\zeta}{K_1(2\lambda)}\,\dfrac{K_2(2\tilde r)}{2\tilde r}, & r > R \end{cases}",
               f"{SI} Eq. 34c"),
-    "s2_rt": (r"\frac{\overline{\tau}_{r\theta}}{\tfrac12\rho g\alpha R} = \sin\theta \begin{cases} \left(1 - \tfrac34 f_\delta\right)\dfrac{\tilde r}{\lambda}, & r < R \\[8pt] -\dfrac{f_\delta}{K_1(\lambda)}\,\dfrac{K_2(\tilde r)}{\tilde r} + \dfrac{f_\zeta}{K_1(2\lambda)}\left[K_1''(2\tilde r) - \tfrac12 K_1(2\tilde r)\right], & r > R \end{cases}",
+    "s2_rt": (r"\tilde{\tau}_{r\theta} = \sin\theta \begin{cases} \left(1 - \tfrac34 f_\delta\right)\dfrac{\tilde r}{\lambda}, & r < R \\[8pt] -\dfrac{f_\delta}{K_1(\lambda)}\,\dfrac{K_2(\tilde r)}{\tilde r} + \dfrac{f_\zeta}{K_1(2\lambda)}\left[K_1''(2\tilde r) - \tfrac12 K_1(2\tilde r)\right], & r > R \end{cases}",
               f"{SI} Eq. 34b"),
     "s2_cauchy": (r"\Delta\overline{\sigma}_{rr} = 2\overline{\tau}_{rr} + \overline{\tau}_{\theta\theta},\qquad \Delta\overline{\sigma}_{\theta\theta} = 2\overline{\tau}_{\theta\theta} + \overline{\tau}_{rr},\qquad \Delta\overline{\sigma}_{r\theta} = \overline{\tau}_{r\theta}",
                   f"{SI} text before Eq. 35"),
     # ── symbols and readouts ──
     "sym_H": (r"H", "symbol: ice thickness"),
     "sym_alpha": (r"\alpha", "symbol: surface slope"),
-    "sym_gamma": (r"\gamma", "symbol: the sweep's sliding parameter"),
     "sym_R": (r"R", "symbol: patch radius"),
     "sym_eta": (r"\eta", "symbol: viscosity"),
     "sym_c0": (r"c_0", "symbol: basal drag coefficient"),
     "sym_lambda": (r"\lambda", "symbol: lambda = k0 R"),
     "sym_k0inv": (r"1/k_0", "symbol: the decay length"),
-    "sym_tau_scale": (r"[\tau]", "symbol: the stress scale"),
+    "sym_tau_scale": (r"\tfrac12\rho g\alpha R", "the stress scale, written out (the paper names no symbol for it)"),
     "lab_1d": (r"\tau_{xx}\ \text{(1-D)}", "curve label: the 1-D solution"),
     "lab_2d": (r"\overline{\tau}_{xx}\ \text{(2-D, } y = 0)", "curve label: the 2-D solution along the flow line"),
-    "err_def": (r"\varepsilon \equiv \frac{\max\left|\overline{\tau}^{\,\mathrm{Stokes}} - \overline{\tau}^{\,\mathrm{theory}}\right|}{\max\left|\overline{\tau}^{\,\mathrm{theory}}\right|}",
-                "the validity metric, from the sweep manifest's max_kpa"),
-    "ax_RH": (r"R/H", "validity-map axis: patch radius over thickness"),
-    "ax_LH": (r"\dfrac{1}{k_0 H} = \sqrt{2/\gamma}", "validity-map axis: decay length over thickness"),
 }
 
 
@@ -173,7 +173,7 @@ def main():
         "// LaTeX (latex + dvisvgm, Computer Modern)  for the APS DFD 2026",
         "// page (SectionDfd.vue — the shallow-stream theory: governing equations,",
         "// the 1-D and 2-D stress solutions, symbols and readouts),",
-        "// served from the media bucket at dfd/eq_v1/<name>.svg. Sizes in bp;",
+        "// served from the media bucket at dfd/eq_v2/<name>.svg. Sizes in bp;",
         "// base = image top → baseline.",
         "export interface DfdEqBox { w: number; h: number; base: number }",
         "export const DFD_EQ: Record<string, DfdEqBox> = {",
@@ -184,7 +184,7 @@ def main():
     TS_OUT.write_text("\n".join(lines) + "\n")
     print(f"wrote {len(manifest)} -> {TS_OUT.relative_to(ROOT)}")
     print(f"svgs in {OUT.relative_to(ROOT)} + {R2_CACHE.relative_to(ROOT)}: {len(manifest)}")
-    print("\nupload:\n  rclone copy cinematic/data/eq_dfd r2:<bucket>/dfd/eq_v1 "
+    print("\nupload:\n  rclone copy cinematic/data/eq_dfd r2:<bucket>/dfd/eq_v2 "
           "--header-upload 'Cache-Control: public, max-age=31536000, immutable'")
 
 
