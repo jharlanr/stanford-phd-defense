@@ -68,6 +68,8 @@ export interface DeeperFigure {
   table?: 'params' | 'kappa' | 'ch2-lakes' | 'ch2-elastic' | 'ch2-viscous'
   /** An interactive viewer instead of an image (Chapter 2's fields). */
   viewer?: 'ch2-fields' | 'ch2-slab' | 'ch2-sequence'
+  /** A door to another page instead of a figure (the APS DFD 2026 presentation). */
+  door?: 'dfd'
   /** A live plot instead of an image (Chapter 2's elastic stress space
    *  from phase_space_v2.json, Ch2ElasticStressSpaces.vue;
    *  the elastic | viscous population pair, Ch2PopulationSpaces.vue). */
@@ -389,6 +391,24 @@ const CH1_GROUPS: DeeperGroup[] = [
 const K2 = 'addl/deeper/ch02/figs/'
 
 const CH2_GROUPS: DeeperGroup[] = [
+  // The APS DFD 2026 Interact presentation of this chapter's paper (the
+  // director's ask, 2026-11-21: a DFD door right at the top of this page)
+  // — the two-minute flash slide and the interactive poster live on their
+  // own page, /additional-work/dfd (SectionDfd.vue, config/dfd.ts).
+  {
+    label: 'APS DFD 2026',
+    id: 'dfd',
+    figures: [
+      {
+        id: 'dfd',
+        tag: 'Interact · 22 November 2026',
+        indexTag: 'DFD',
+        short: 'The presentation',
+        title: 'The flash talk and the interactive poster',
+        door: 'dfd',
+      },
+    ],
+  },
   // The PDFs open in a new tab — the manuscript as
   // submitted (August 2026, line-numbered) and its supporting information.
   {

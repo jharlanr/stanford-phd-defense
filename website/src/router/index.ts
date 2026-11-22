@@ -26,6 +26,9 @@ export const router = createRouter({
     // Additional Work sub-pages: the section route is the card menu;
     // each door is its own URL so it deep-links and back-navigates.
     { path: '/additional-work/mgsim', name: 'additional-work-mgsim', component: Explore },
+    // APS DFD 2026 · Interact: the flash slide + the interactive poster
+    // (SectionDfd.vue; the door is at the top of the Chapter 2 deeper dive)
+    { path: '/additional-work/dfd', name: 'additional-work-dfd', component: Explore },
     { path: '/additional-work/terminal-bench', name: 'additional-work-terminal-bench', component: Explore },
     { path: '/additional-work/fracture', name: 'additional-work-fracture', component: Explore },
     { path: '/additional-work/fieldwork', name: 'additional-work-fieldwork', component: Explore },

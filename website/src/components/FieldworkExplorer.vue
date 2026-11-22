@@ -91,7 +91,7 @@
     </svg>
 
     <!-- Full page (Additional Work door): the way back to the cards. -->
-    <button v-if="mode === 'full'" class="fw-exit" @click="emit('exit')">← doors</button>
+    <button v-if="mode === 'full' && exitLabel !== ''" class="fw-exit" @click="emit('exit')">{{ exitLabel ?? '← doors' }}</button>
 
     <!-- Minimap: where on Greenland this is. -->
     <div class="minimap">
@@ -293,6 +293,9 @@ const props = defineProps<{
    * panel. Clicks on tracks still work in between — a click is not a step.
    */
   clip?: string | null
+  /** Full mode's exit pill text; '' hides the pill (a host page with its
+   *  own way back, the APS DFD page's field beat). */
+  exitLabel?: string
 }>()
 const emit = defineEmits<{ select: [id: string | null]; exit: []; covering: [on: boolean] }>()
 
