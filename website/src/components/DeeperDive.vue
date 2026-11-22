@@ -119,6 +119,23 @@
             </div>
           </div>
 
+          <!-- APS DFD 2026: the door to the conference presentation's own
+               page — the two-minute flash slide and the interactive poster
+               (/additional-work/dfd, SectionDfd.vue). -->
+          <div v-else-if="f.door === 'dfd'" class="dd-door">
+            <button class="dd-door-logo" aria-label="Open the APS DFD 2026 presentation" @click="openDfd">
+              <img :src="mediaUrl(DFD_LOGO_KEY)" alt="" />
+            </button>
+            <div class="dd-door-side">
+              <p class="dd-door-title">{{ DFD_TITLE }}</p>
+              <p class="dd-door-meta">{{ DFD_MEETING.format }} · {{ DFD_MEETING.session }} · {{ DFD_MEETING.place }}, {{ DFD_MEETING.date }}</p>
+              <button class="dd-pdf-btn" @click="openDfd">
+                Open the presentation <span class="dd-pdf-arrow" aria-hidden="true">→</span>
+              </button>
+              <p class="dd-pdf-meta">the two-minute slide · the interactive poster · {{ DFD_BEATS }} beats</p>
+            </div>
+          </div>
+
           <!-- Chapter 2's results walk WITH the elastic model (taken off
                the talk; the director wanted the full sequence, elastic
                model included, kept here as a deeper-dive section). -->
@@ -342,11 +359,17 @@ import {
 } from '../config/deeperDive'
 import { AUTHOR_NAMES, refUrl } from '../config/references'
 import { mediaUrl } from '../config/media'
+import { DFD_BEATS, DFD_LOGO_KEY, DFD_MEETING, DFD_TITLE } from '../config/dfd'
 
 const props = defineProps<{ chapter: DeeperChapter }>()
 
 const route = useRoute()
 const router = useRouter()
+
+/** The APS DFD door (Chapter 2's first entry) → the presentation's page. */
+function openDfd(): void {
+  void router.push({ name: 'additional-work-dfd' })
+}
 
 const page = computed(() => DEEPER_PAGES[props.chapter])
 const paperUrl = computed(() => refUrl(page.value.paper))
@@ -819,6 +842,51 @@ onBeforeUnmount(() => {
   align-items: flex-start;
   gap: 0.7rem;
 }
+/* The APS DFD door: the meeting's mark on its white plate (the SVG carries
+   its own white ground), the talk's title, the button in the PDF button's
+   clothes. */
+.dd-door {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  flex-wrap: wrap;
+}
+.dd-door-logo {
+  flex: none;
+  width: 280px;
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 12px;
+  /* the mark is re-grounded for the dark page (config/dfd.ts DFD_LOGO_KEY) */
+  background: linear-gradient(135deg, rgba(30, 24, 12, 0.95), rgba(10, 8, 5, 0.95));
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(232, 185, 74, 0.35), 0 12px 36px rgba(0, 0, 0, 0.55);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.dd-door-logo:hover,
+.dd-door-logo:focus-visible {
+  box-shadow: 0 0 0 2px var(--gold), 0 14px 40px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+  outline: none;
+}
+.dd-door-logo img { display: block; width: 100%; height: auto; }
+.dd-door-side { flex: 1 1 24rem; min-width: 0; display: flex; flex-direction: column; gap: 0.7rem; align-items: flex-start; }
+.dd-door-title {
+  margin: 0;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: #f5f0e6;
+  text-wrap: balance;
+}
+.dd-door-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
 .dd-pdf-btn {
   display: inline-flex;
   align-items: center;

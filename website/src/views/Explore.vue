@@ -812,6 +812,21 @@
       />
     </Transition>
 
+    <!-- Additional Work → Chapter 2's deeper dive → APS DFD 2026
+         (/additional-work/dfd): the conference flash slide and the
+         interactive poster, a flat opaque layer above the live globe with
+         beats of its own; the shared pills step them (`nav-state`). Its
+         exit pill returns to the deeper dive's Chapter 2 page. -->
+    <Transition name="section-fade">
+      <SectionDfd
+        v-if="appMode === 'section' && isDfdPage"
+        :advance-trigger="dfdAdvanceTrigger"
+        :back-trigger="dfdBackTrigger"
+        @nav-state="dfdNav = $event"
+        @exit="onDfdExit"
+      />
+    </Transition>
+
     <!-- CONCLUSION: one page, the takeaways —
          a flat layer above the globe like the Repos table. -->
     <Transition name="section-fade">
@@ -952,6 +967,7 @@ import SectionTerminalBench from '../components/sections/SectionTerminalBench.vu
 import SectionFracture from '../components/sections/SectionFracture.vue'
 import SectionLabelLakes from '../components/sections/SectionLabelLakes.vue'
 import SectionRevisit from '../components/sections/SectionRevisit.vue'
+import SectionDfd from '../components/sections/SectionDfd.vue'
 import SectionRepos from '../components/sections/SectionRepos.vue'
 import SectionReferences from '../components/sections/SectionReferences.vue'
 import SectionConclusion from '../components/sections/SectionConclusion.vue'
@@ -1014,8 +1030,12 @@ const currentSection = ref<SectionId | null>(null)
 // (back → the grid, next → Repos).
 // 'revisit' = "Revisiting lake drainage papers" (/additional-work/revisit,
 // SectionRevisit.vue): keeps the globe and drives it, like 'mgsim'.
-type AddlPage = 'mgsim' | 'terminal-bench' | 'fieldwork' | 'fracture' | 'label' | 'revisit' | 'deeper'
-const ADDL_PAGES: AddlPage[] = ['mgsim', 'terminal-bench', 'fieldwork', 'fracture', 'label', 'revisit', 'deeper']
+// 'dfd' = the APS DFD 2026 presentation (/additional-work/dfd,
+// SectionDfd.vue): a flat page with beats of its own — the flash slide and
+// the interactive poster — stepped by the shared pills like the revisit
+// page (`dfdNav`); its door is the top of the Chapter 2 deeper dive.
+type AddlPage = 'mgsim' | 'terminal-bench' | 'fieldwork' | 'fracture' | 'label' | 'revisit' | 'deeper' | 'dfd'
+const ADDL_PAGES: AddlPage[] = ['mgsim', 'terminal-bench', 'fieldwork', 'fracture', 'label', 'revisit', 'deeper', 'dfd']
 const addlPage = ref<AddlPage | null>(null)
 const isMgsimPage = computed(
   () => currentSection.value === 'additional-work' && addlPage.value === 'mgsim',
@@ -1040,6 +1060,14 @@ const isRevisitPage = computed(
 const revisitNav = ref<{ next: boolean; back: boolean }>({ next: false, back: false })
 const revisitAdvanceTrigger = ref(0)
 const revisitBackTrigger = ref(0)
+// The DFD page's beats for the shared pills (the same contract as the
+// revisit page: it reports whether it has a step, a bump hands it the press).
+const isDfdPage = computed(
+  () => currentSection.value === 'additional-work' && addlPage.value === 'dfd',
+)
+const dfdNav = ref<{ next: boolean; back: boolean }>({ next: false, back: false })
+const dfdAdvanceTrigger = ref(0)
+const dfdBackTrigger = ref(0)
 // Any Additional-Work door page (a side room of the site path).
 const isAddlDoorPage = computed(
   () => currentSection.value === 'additional-work' && addlPage.value !== null,
@@ -1466,6 +1494,8 @@ function bumpBeatBack(): void {
 function navNext(): void {
   // The revisit page's days come first (the paper's maps, then every lake).
   if (isRevisitPage.value && revisitNav.value.next) revisitAdvanceTrigger.value += 1
+  // The DFD page's beats (the flash slide, then the poster's).
+  else if (isDfdPage.value && dfdNav.value.next) dfdAdvanceTrigger.value += 1
   else if (beatChapter.value) bumpBeatAdvance()
   else advanceSection()
 }
@@ -1483,6 +1513,11 @@ function navBack(): void {
   // cascade → its earlier days); on its first day BACK is the usual one.
   if (isRevisitPage.value && revisitNav.value.back) {
     revisitBackTrigger.value += 1
+    return
+  }
+  // The DFD page retraces its beats first; on its slide BACK is the site's own.
+  if (isDfdPage.value && dfdNav.value.back) {
+    dfdBackTrigger.value += 1
     return
   }
   // Reached through a door (config/sitePath.ts, the door trail): back to
@@ -1623,6 +1658,11 @@ function openDoor(id: SectionId): void {
 function exitTo(id: SectionId): void {
   navIntent = 'exit'
   settleIntent(router.push({ name: id }))
+}
+/** The DFD page's exit pill: back to the Chapter 2 deeper dive, where its door is. */
+function onDfdExit(): void {
+  navIntent = 'exit'
+  settleIntent(router.push({ name: 'additional-work-deeper', params: { chapter: 'chapter2' } }))
 }
 
 // The presenter remote (the director presents with a Logi Spotlight 2 and
