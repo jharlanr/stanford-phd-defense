@@ -91,16 +91,10 @@ export const DFD_AFFILIATIONS = ['Stanford University', 'Stony Brook University'
 export const DFD_ABSTRACT =
   'When meltwater lakes drain via hydrofracture, the injected water lubricates the ice-sheet bed and alters the ice-sheet stresses, potentially instigating fracture, draining neighboring lakes, and accelerating ice flow toward the ocean. As more lakes form with climate change, key open questions are how far inland, and when, surface-to-bed lake drainage will occur. Prior models predict long-range triggering between drainages, yet field observations show limited spatial extent. We provide a mechanistic understanding of stress-field evolution following lake drainage: an initial elastic response transitions to a viscous, sliding-induced stress perturbation whose reach is limited by basal friction. A stress-space diagram combining simulations with satellite observations further reveals the stress conditions required for a lake to drain through the ice to the bed.'
 
-export const DFD_FUNDING =
-  'Supported by NSF Office of Polar Programs OPP-2344690 and OPP-2441132 (C.Y.L., J.H.R., N.B.C., E.L., F.C.) and the Natural Environment Research Council NE/Y002369/1 (L.A.S.). C.Y.L. was additionally supported by the Alfred P. Sloan Foundation, FG-2024-21649.'
-
-export const DFD_PAPER_LINE = 'Lai, Rines, Coffey, Lee, Clerc, Hilditch, Gagliardini & Stevens (2026) · PNAS, in revision'
 
 /** The takeaway (the director's to edit — written once here, read on the last beat; trusted HTML for the subscript). */
 export const DFD_TAKEAWAY =
   'A slippery patch perturbs the stress by ½ρgαR over √(4ηH/c<sub>0</sub>): tension upstream, compression downstream — the 1-D ramp and exponential tails, bent in 2-D by lateral support into Bessel functions.'
-
-export const DFD_SITE_URL = 'jharlanr.github.io/stanford-phd-defense/additional-work/dfd'
 
 /** The meeting's logo: the DFD 2026 mark re-grounded for the dark page
  *  (the white ground dropped, its greys lifted to the site's warm white;

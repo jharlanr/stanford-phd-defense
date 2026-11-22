@@ -70,9 +70,6 @@
             <!-- trusted static HTML (the subscript) --><p class="dfd-take-line" v-html="DFD_TAKEAWAY" />
             <div class="dfd-take-eq"><DfdEq name="scales" :k="2.4" :inline="false" /></div>
           </div>
-          <p class="dfd-take-paper">{{ DFD_PAPER_LINE }}</p>
-          <p class="dfd-take-fund">{{ DFD_FUNDING }}</p>
-          <p class="dfd-take-url">{{ DFD_SITE_URL }}</p>
         </div>
       </div>
     </Transition>
@@ -94,9 +91,6 @@ import {
   DFD_BEATS,
   DFD_BEAT_IDS,
   DFD_BEAT_LABELS,
-  DFD_FUNDING,
-  DFD_PAPER_LINE,
-  DFD_SITE_URL,
   DFD_TAKEAWAY,
   dfdSteps,
 } from '../../config/dfd'
@@ -352,7 +346,4 @@ body.dfd-print-body .beat-nav {
   text-wrap: balance;
 }
 .dfd-take-eq { margin-top: 1.4rem; display: flex; justify-content: center; }
-.dfd-take-paper { margin: 0.6rem 0 0; color: var(--gold-dim); font-size: 0.95rem; }
-.dfd-take-fund { margin: 0; max-width: 70vw; font-size: 0.8rem; color: rgba(245, 240, 230, 0.6); }
-.dfd-take-url { margin: 0; font-size: 0.85rem; color: rgba(245, 240, 230, 0.7); letter-spacing: 0.03em; }
 </style>
