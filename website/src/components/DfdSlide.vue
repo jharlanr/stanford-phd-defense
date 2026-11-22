@@ -46,12 +46,6 @@
       </div>
     </div>
 
-    <footer class="sl-foot">
-      <span class="sl-paper">{{ DFD_PAPER_LINE }}</span>
-      <span class="sl-url">{{ DFD_SITE_URL }}</span>
-      <span class="sl-fund">{{ DFD_FUNDING }}</span>
-    </footer>
-
     <Transition name="sl-fade">
       <div v-if="abstractOn" class="sl-abstract" role="dialog" aria-label="Abstract" @click="abstractOn = false">
         <div class="sl-abstract-card">
@@ -71,11 +65,8 @@ import {
   DFD_ABSTRACT,
   DFD_AFFILIATIONS,
   DFD_AUTHORS,
-  DFD_FUNDING,
   DFD_LOGO_KEY,
   DFD_MEETING,
-  DFD_PAPER_LINE,
-  DFD_SITE_URL,
   DFD_TITLE,
 } from '../config/dfd'
 import { mediaUrl } from '../config/media'
@@ -100,9 +91,9 @@ const KS = computed(() => KE.value * 0.88)
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   gap: 1vh;
-  padding: 0 1.6vw;
+  padding: 0 1.6vw 2.2vh;
   box-sizing: border-box;
   color: #f5f0e6;
   font-family: 'Inter', system-ui, sans-serif;
@@ -211,20 +202,6 @@ const KS = computed(() => KE.value * 0.88)
   background: rgba(8, 6, 4, 0.5);
 }
 .sl-eq-side { display: flex; flex-direction: column; align-items: flex-start; gap: 1.2vh; }
-
-/* ── the foot ── */
-.sl-foot {
-  display: flex;
-  align-items: baseline;
-  gap: 1.5vw;
-  flex-wrap: wrap;
-  font-size: clamp(0.6rem, 0.74vw, 0.8rem);
-  color: rgba(245, 240, 230, 0.55);
-  padding-bottom: 0.4vh;
-}
-.sl-paper { color: var(--gold-dim); }
-.sl-url { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
-.sl-fund { flex: 1 1 100%; }
 
 .sl-abstract {
   position: absolute;
