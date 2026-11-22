@@ -148,3 +148,16 @@ export function symTicks(lim: number): number[] {
   for (let v = -Math.floor(lim / step + 1e-9) * step; v <= lim + 1e-9; v += step) out.push(Math.round(v * 1000) / 1000)
   return out
 }
+
+const SUP = '⁰¹²³⁴⁵⁶⁷⁸⁹'
+/** 2.0×10¹⁰ — a value as mantissa × power of ten with unicode superscripts (plain text, for SVG and spans alike). */
+export function fmtPow(v: number): string {
+  if (!(v > 0)) return '0'
+  const e = Math.floor(Math.log10(v))
+  const m = v / Math.pow(10, e)
+  const sup = String(e)
+    .split('')
+    .map((ch) => (ch === '-' ? '⁻' : SUP[Number(ch)]))
+    .join('')
+  return `${m.toFixed(1)}×10${sup}`
+}

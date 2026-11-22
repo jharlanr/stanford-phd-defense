@@ -1,7 +1,7 @@
 <template>
   <!-- THE LAB: the closed-form theory live, on continuous sliders over
-       every parameter (H · α · γ · R; the sweep's four, the stress solution
-       does not see η at fixed γ). Left: the 2-D depth-averaged field of
+       every parameter (H · α · c₀ · R — the PAPER's four; the sweep's
+       γ = c₀H/2η stays internal, the director's rule: the paper's notation). Left: the 2-D depth-averaged field of
        any component on the central ±25 km, painted from lib/slabTheory
        (Bessel K, no rasters). Right: the centreline profile — the 2-D
        τ̄_xx along y = 0 (the dotted line across the field is where the
@@ -25,7 +25,7 @@
           :aria-label="sl.key"
           @input="onSlide(sl, $event)"
         />
-        <span class="lab-val">{{ sl.fmt(p[sl.key]) }}</span>
+        <span class="lab-val">{{ sl.fmt(val(sl.key)) }}</span>
       </div>
       <button class="lab-reset" @click="reset">↺ the paper’s case</button>
     </div>
@@ -107,7 +107,7 @@
           <span class="lab-r"><DfdEq name="sym_tau_scale" :k="2.2" /><b>{{ fmtK(s.stressPa / 1000) }} kPa</b></span>
           <span class="lab-r"><DfdEq name="sym_k0inv" :k="2.2" /><b>{{ (s.decayM / 1000).toFixed(2) }} km</b></span>
           <span class="lab-r"><DfdEq name="sym_lambda" :k="2.2" /><b>{{ s.lambda.toFixed(2) }}</b></span>
-          <span class="lab-r"><DfdEq name="sym_c0" :k="2.2" /><b v-html="fmtSci(s.c0) + ' Pa s m<sup>−1</sup>'" /></span>
+          <span class="lab-r"><DfdEq name="sym_ssa_ratio" :k="2.2" /><b>{{ ((s.c0 * p.H) / ETA).toFixed(2) }}</b></span>
           <span class="lab-r lab-r-ratio"><span class="lab-r-k">peak 2-D / 1-D</span><b>{{ ratio.toFixed(2) }}</b></span>
         </div>
       </div>
@@ -118,18 +118,34 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import DfdEq from './DfdEq.vue'
-import { centreline2D, fieldGrid, oneD, slabScales, type SlabField, type SlabParams } from '../lib/slabTheory'
+import { ETA, centreline2D, fieldGrid, oneD, slabScales, type SlabField, type SlabParams } from '../lib/slabTheory'
+import { fmtPow } from '../config/dfdCollapse'
 
 // ── the parameters ──
-/** The paper's Fig. 3 case (R 2.5 km, H 1 km, α 1°, c₀ = 2·10¹⁰ ⇒ γ 0.1; λ = 0.56). */
+/** The paper's Fig. 3 case (R 2.5 km, H 1 km, α 1°, c₀ = 2·10¹⁰ Pa s m⁻¹ ⇒ γ 0.1; λ = 0.56). */
 const PAPER: SlabParams = { H: 1000, alphaDeg: 1.0, gamma: 0.1, R: 2500 }
+const PAPER_C0 = 2e10
 const p = reactive<SlabParams>({ ...PAPER })
+/** The slider's c₀ (the paper's parameter); the theory's γ = c₀H / 2η follows it and H. */
+const c0 = ref(PAPER_C0)
+watch([c0, () => p.H], ([c, H]) => {
+  p.gamma = (c * H) / (2 * ETA)
+}, { immediate: true })
 function reset(): void {
   Object.assign(p, PAPER)
+  c0.value = PAPER_C0
+}
+type SliderKey = 'H' | 'alphaDeg' | 'c0' | 'R'
+function val(key: SliderKey): number {
+  return key === 'c0' ? c0.value : p[key]
+}
+function setVal(key: SliderKey, v: number): void {
+  if (key === 'c0') c0.value = v
+  else p[key] = v
 }
 
 interface Slider {
-  key: keyof SlabParams
+  key: SliderKey
   sym: string
   min: number
   max: number
@@ -140,11 +156,11 @@ interface Slider {
 const SLIDERS: Slider[] = [
   { key: 'H', sym: 'sym_H', min: 300, max: 3000, step: 50, fmt: (v) => `${(v / 1000).toFixed(2)} km` },
   { key: 'alphaDeg', sym: 'sym_alpha', min: 0.1, max: 1.0, step: 0.05, fmt: (v) => `${v.toFixed(2)}°` },
-  { key: 'gamma', sym: 'sym_gamma', min: 0.01, max: 2, log: true, fmt: (v) => (v < 0.1 ? v.toFixed(3) : v.toFixed(2)) },
+  { key: 'c0', sym: 'sym_c0', min: 1e9, max: 1e12, log: true, fmt: (v) => `${fmtPow(v)} Pa s m⁻¹` },
   { key: 'R', sym: 'sym_R', min: 500, max: 7500, step: 100, fmt: (v) => `${(v / 1000).toFixed(1)} km` },
 ]
 function toPos(sl: Slider): number {
-  const v = p[sl.key]
+  const v = val(sl.key)
   const t = sl.log
     ? (Math.log10(v) - Math.log10(sl.min)) / (Math.log10(sl.max) - Math.log10(sl.min))
     : (v - sl.min) / (sl.max - sl.min)
@@ -156,7 +172,7 @@ function onSlide(sl: Slider, e: Event): void {
     ? Math.pow(10, Math.log10(sl.min) + t * (Math.log10(sl.max) - Math.log10(sl.min)))
     : sl.min + t * (sl.max - sl.min)
   if (sl.step) v = Math.round(v / sl.step) * sl.step
-  p[sl.key] = v
+  setVal(sl.key, v)
 }
 
 const s = computed(() => slabScales(p))
@@ -273,11 +289,6 @@ const brkLeftPct = computed(() => ((px(-p.R - s.value.decayM / 2) / PW) * 100))
 
 function fmtK(v: number): string {
   return v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2)
-}
-function fmtSci(v: number): string {
-  const e = Math.floor(Math.log10(v))
-  const m = v / Math.pow(10, e)
-  return `${m.toFixed(1)} × 10<sup>${e}</sup>`
 }
 </script>
 

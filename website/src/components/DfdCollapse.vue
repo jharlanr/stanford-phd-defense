@@ -63,7 +63,7 @@
     <div v-if="step === 0" class="cl-prof">
       <div class="cl-plots">
         <!-- dimensional -->
-        <svg :viewBox="`0 0 ${W} ${H}`" class="cl-svg" aria-label="Depth-averaged radial Cauchy stress perturbation along the flow line, kPa against x in km, Stokes against theory" @mousemove="onMoveD" @mouseleave="hovD = null">
+        <svg :viewBox="`0 0 ${W} ${H}`" class="cl-svg" aria-label="Depth-averaged radial Cauchy stress perturbation along the flow line, kPa against signed r in km, Stokes against theory" @mousemove="onMoveD" @mouseleave="hovD = null">
           <text :x="PL" :y="21" class="cl-title">DIMENSIONAL</text>
           <text :x="PR" :y="21" text-anchor="end" class="cl-title cl-title-dim">y = 0 · Stokes ——— · theory – – –</text>
           <rect v-if="series.length" :x="px(-series[0].p.R / 1000)" :y="PT" :width="px(series[0].p.R / 1000) - px(-series[0].p.R / 1000)" :height="PB - PT" class="cl-band" />
@@ -86,10 +86,10 @@
           <!-- the hover: a hairline and the numbers at that x -->
           <g v-if="hovD !== null">
             <line :x1="px(hovD)" :x2="px(hovD)" :y1="PT" :y2="PB" class="cl-hair" />
-            <text :x="PL + 10" :y="PT + 20" class="cl-tt cl-hov">x = {{ hovD.toFixed(2) }} km</text>
+            <text :x="PL + 10" :y="PT + 20" class="cl-tt cl-hov">r = {{ hovD.toFixed(2) }} km</text>
             <text v-for="(r, i) in hovReadD" :key="r.id" :x="PL + 10" :y="PT + 38 + i * 17" class="cl-tt cl-hov" :style="{ fill: r.colour }">{{ r.text }}</text>
           </g>
-          <text :x="(PL + PR) / 2" :y="H - 8" text-anchor="middle" class="cl-tt cl-axt"><tspan font-style="italic">x</tspan> [km]</text>
+          <text :x="(PL + PR) / 2" :y="H - 8" text-anchor="middle" class="cl-tt cl-axt"><tspan font-style="italic">r</tspan> [km]</text>
           <text :x="17" :y="(PT + PB) / 2" text-anchor="middle" class="cl-tt cl-axt" :transform="`rotate(-90 17 ${(PT + PB) / 2})`">Δ<tspan font-style="italic">σ̄</tspan><tspan dy="4" font-size="10.5" font-style="italic">rr</tspan><tspan dy="-4"> [kPa]</tspan></text>
         </svg>
 
@@ -114,17 +114,17 @@
             <path :d="nSim[i].marks" class="cl-mk" :style="{ fill: sr.colour }" />
           </g>
           <path :d="nTheoryPath" class="cl-th1" />
-          <!-- the two scales, in the quadrant the curves never enter (downstream is compression) -->
+          <!-- k₀'s definition (the axes carry the scales themselves), in the quadrant the curves never enter (downstream is compression) -->
           <foreignObject :x="PR - CAPW - 6" :y="PT + 8" :width="CAPW" :height="CAPH">
-            <div class="cl-capwrap"><div class="cl-cap"><DfdEq name="scales" :k="1.5" :inline="false" /></div></div>
+            <div class="cl-capwrap"><div class="cl-cap"><DfdEq name="def_k0" :k="1.9" :inline="false" /></div></div>
           </foreignObject>
           <g v-if="hovN !== null">
             <line :x1="nx(hovN)" :x2="nx(hovN)" :y1="PT" :y2="PB" class="cl-hair" />
-            <text :x="PL + 10" :y="PT + 20" class="cl-tt cl-hov">x k₀ = {{ hovN.toFixed(2) }}</text>
+            <text :x="PL + 10" :y="PT + 20" class="cl-tt cl-hov">r̃ = {{ hovN.toFixed(2) }}</text>
             <text v-for="(r, i) in hovReadN" :key="r.id" :x="PL + 10" :y="PT + 38 + i * 17" class="cl-tt cl-hov" :style="{ fill: r.colour }">{{ r.text }}</text>
           </g>
-          <text :x="(PL + PR) / 2" :y="H - 8" text-anchor="middle" class="cl-tt cl-axt"><tspan font-style="italic">x k</tspan><tspan dy="4" font-size="10.5">0</tspan><tspan dy="-4"> = </tspan><tspan font-style="italic">x</tspan> / [<tspan font-style="italic">x</tspan>]</text>
-          <text :x="17" :y="(PT + PB) / 2" text-anchor="middle" class="cl-tt cl-axt" :transform="`rotate(-90 17 ${(PT + PB) / 2})`">Δ<tspan font-style="italic">σ̄</tspan><tspan dy="4" font-size="10.5" font-style="italic">rr</tspan><tspan dy="-4"> / [</tspan><tspan font-style="italic">τ</tspan>]</text>
+          <text :x="(PL + PR) / 2" :y="H - 8" text-anchor="middle" class="cl-tt cl-axt"><tspan font-style="italic">r̃</tspan> = <tspan font-style="italic">k</tspan><tspan dy="4" font-size="10.5">0</tspan><tspan dy="-4"> </tspan><tspan font-style="italic">r</tspan></text>
+          <text :x="17" :y="(PT + PB) / 2" text-anchor="middle" class="cl-tt cl-axt" :transform="`rotate(-90 17 ${(PT + PB) / 2})`">Δ<tspan font-style="italic">σ̄</tspan><tspan dy="4" font-size="10.5" font-style="italic">rr</tspan><tspan dy="-4"> / (½</tspan><tspan font-style="italic">ρgαR</tspan><tspan>)</tspan></text>
         </svg>
       </div>
 
@@ -175,7 +175,7 @@
         </svg>
         <div v-if="hov" class="cl-tip" :class="{ 'cl-tip-below': sy(hov.y) < 0.22 * SH }" :style="{ left: (sx(hov.x) / SW) * 100 + '%', top: (sy(hov.y) / SH) * 100 + '%' }">
           <b>{{ hov.id }}</b>
-          <span>{{ hov.label }} · γ {{ hov.gamma }}</span>
+          <span>{{ hov.label }} · c₀ {{ fmtPow(hov.c0) }} Pa s m⁻¹</span>
           <span>theory {{ fmtK(hov.x) }} · Stokes {{ fmtK(hov.y) }} kPa</span>
         </div>
       </div>
@@ -210,6 +210,7 @@ import {
   COLLAPSE_PAPER_RUNS,
   COLLAPSE_SHAPES,
   H_SHAPES,
+  fmtPow,
   fmtRunParams,
   goldRamp,
   lambdaGroups,
@@ -222,7 +223,7 @@ import {
   type MarkerShape,
   type SlabProfiles,
 } from '../config/dfdCollapse'
-import { fieldAt, slabScales, tauHat, type SlabParams, type SlabScales } from '../lib/slabTheory'
+import { ETA, fieldAt, slabScales, tauHat, type SlabParams, type SlabScales } from '../lib/slabTheory'
 
 defineProps<{
   /** The view on screen: 0 the profiles and their collapse, 1 the maxima. */
@@ -340,8 +341,8 @@ const X_HALF_KM = 25
 /** The sweep's largest |Δσ̄_rr| along y = 0 is 618 kPa (R = 5 km, H = 300 m,
  *  α = 1°, γ = 1); ±750 puts a 250 kPa tick on each frame edge. */
 const Y_LIM_KPA = 750
-/** The scales plate inside the dimensionless plot (viewBox units). */
-const CAPW = 330
+/** The k₀ plate inside the dimensionless plot (viewBox units). */
+const CAPW = 220
 const CAPH = 96
 /** Dimensionless half-width: at least 2.3 decay lengths past the patch
  *  edge for 21 of the 23 λ groups (λ ≤ 3.73); the two largest (5.9, 11.8)
@@ -500,7 +501,7 @@ interface Dot {
   id: string
   x: number
   y: number
-  gamma: number
+  c0: number
   aR: number
   shape: MarkerShape
   fill: string
@@ -516,7 +517,7 @@ const dots = computed<Dot[]>(() => {
     const y = r.max_kpa.sim_da[f]
     if (x === undefined || y === undefined) continue
     const aR = ((r.alpha_deg * Math.PI) / 180) * r.R
-    out.push({ id, x, y, gamma: r.gamma, aR, shape: H_SHAPES[r.H] ?? 'circle', fill: goldRamp(aR / AR_MAX), label: fmtRunParams(r) })
+    out.push({ id, x, y, c0: (2 * ETA * r.gamma) / r.H, aR, shape: H_SHAPES[r.H] ?? 'circle', fill: goldRamp(aR / AR_MAX), label: fmtRunParams(r) })
   }
   // the brightest (largest αR) drawn last, on top
   out.sort((a, b) => a.aR - b.aR)
