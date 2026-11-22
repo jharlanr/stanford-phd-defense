@@ -1,7 +1,7 @@
 // APS DFD 2026 · Interact — the conference presentation as a page of the
 // site (/additional-work/dfd, SectionDfd.vue): the two-minute flash slide
 // (beat 0) and the interactive ePoster the presenter walks with visitors
-// during the 40-minute discussion (beats 1–8). The director's brief
+// during the 40-minute discussion (beats 1–7). The director's brief
 // (2026-11-21): the DFD audience wants the fluid mechanics — the 1-D and
 // 2-D slippery-patch theory, its equations, sliders over every parameter,
 // and the theory against the depth-averaged 3-D Stokes runs — plus the
@@ -20,12 +20,12 @@
 //                INTUITION toggle (each term named)
 //   5 lab        live theory on continuous sliders: the 2-D field and the
 //                1-D vs 2-D centreline profile for the same parameters
-//   6 stokes     theory against the 3-D Stokes sweep (the Chapter 2 slab
-//                viewer) + where it breaks down (the sweep's own errors)
-//   7 collapse   the paper's Fig. 3 C–D re-drawn live from the sweep: the
+//   6 collapse   the paper's Fig. 3 C–D re-drawn live from the sweep: the
 //                profiles and their dimensionless collapse, the maxima
-//                against theory
-//   8 takeaway   the line, the funding
+//                against theory (the separate Stokes-viewer beat was cut
+//                by the director on 2026-11-21 night; the deeper dive
+//                still has the viewer)
+//   7 takeaway   the line, the funding
 import { mediaUrl } from './media'
 
 export const DFD_BEAT_IDS = [
@@ -35,7 +35,6 @@ export const DFD_BEAT_IDS = [
   'model',
   'solutions',
   'lab',
-  'stokes',
   'collapse',
   'takeaway',
 ] as const
@@ -59,7 +58,6 @@ export const DFD_BEAT_LABELS: Record<DfdBeatId, string> = {
   model: 'Model',
   solutions: 'Solutions',
   lab: 'Lab',
-  stokes: 'Stokes',
   collapse: 'Collapse',
   takeaway: 'Takeaway',
 }

@@ -9,7 +9,8 @@
        closed form for the SAME parameters (patch length 2R, the same c₀),
        solid — and the scales as numbers. ONE fixed scale everywhere, the
        director's rule: the colour bar and the profile's axis are both
-       ±400 kPa, whatever the sliders say (a curve past it is clipped).
+       ±600 kPa (his call, 2026-11-21 night), whatever the sliders say (a
+       curve past it is clipped).
        Flow is toward +x (to the right); tension sits upstream. -->
   <div class="lab">
     <div class="lab-controls">
@@ -167,7 +168,9 @@ const N = 160
 const HALF_M = 25000
 const TICKS = [-25, -12.5, 0, 12.5, 25]
 /** The one scale: the colour bar and the profile axis alike. */
-const VLIM_KPA = 400
+/** The one fixed scale: colour bar and profile axis, ±600 kPa, ticks every 300 — never fitted. */
+const VLIM_KPA = 600
+const Y_TICK_KPA = 300
 const patchPct = computed(() => (p.R / (2 * HALF_M)) * 100)
 
 const canvasEl = ref<HTMLCanvasElement | null>(null)
@@ -181,12 +184,6 @@ const STOPS: [number, number, number][] = [
   [255, 0, 0],
   [128, 0, 0],
 ]
-function nice(v: number): number {
-  if (v <= 0) return 1
-  const e = Math.pow(10, Math.floor(Math.log10(v)))
-  const m = v / e
-  return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * e
-}
 function paint(): void {
   const c = canvasEl.value
   if (!c) return
@@ -246,7 +243,7 @@ function py(kpa: number): number {
   return PT + half - (kpa / yMaxKpa.value) * half
 }
 const yTicks = computed(() => {
-  const step = nice(yMaxKpa.value / 2.2)
+  const step = Y_TICK_KPA
   const out: number[] = []
   for (let v = -Math.floor(yMaxKpa.value / step) * step; v <= yMaxKpa.value + 1e-9; v += step) out.push(Math.round(v * 100) / 100)
   return out

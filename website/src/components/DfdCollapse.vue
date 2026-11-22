@@ -114,6 +114,10 @@
             <path :d="nSim[i].marks" class="cl-mk" :style="{ fill: sr.colour }" />
           </g>
           <path :d="nTheoryPath" class="cl-th1" />
+          <!-- the two scales, in the quadrant the curves never enter (downstream is compression) -->
+          <foreignObject :x="PR - CAPW - 6" :y="PT + 8" :width="CAPW" :height="CAPH">
+            <div class="cl-capwrap"><div class="cl-cap"><DfdEq name="scales" :k="1.5" :inline="false" /></div></div>
+          </foreignObject>
           <g v-if="hovN !== null">
             <line :x1="nx(hovN)" :x2="nx(hovN)" :y1="PT" :y2="PB" class="cl-hair" />
             <text :x="PL + 10" :y="PT + 20" class="cl-tt cl-hov">x k₀ = {{ hovN.toFixed(2) }}</text>
@@ -140,13 +144,12 @@
             <path :d="markerPath(sr.shape, 0, 0, 4.6)" :fill="sr.colour" stroke="#0a0a0c" stroke-width="1" />
           </svg>
           <span class="cl-chip-p">{{ sr.label }}</span>
-          <span v-if="isSel(sr.id)" class="cl-chip-s">
-            <DfdEq name="sym_tau_scale" :k="1.55" /> {{ fmtK(sr.s.stressPa / 1000) }} kPa
+          <span class="cl-chip-s">
+            <DfdEq name="sym_tau_scale" :k="1.45" /> {{ fmtK(sr.s.stressPa / 1000) }} kPa
             &nbsp;·&nbsp;
-            <DfdEq name="sym_k0inv" :k="1.55" /> {{ (sr.s.decayM / 1000).toFixed(2) }} km
+            <DfdEq name="sym_k0inv" :k="1.45" /> {{ (sr.s.decayM / 1000).toFixed(2) }} km
           </span>
         </button>
-        <div class="cl-cap"><DfdEq name="scales" :k="1.8" :inline="false" /></div>
       </div>
     </div>
 
@@ -329,14 +332,24 @@ function markPath(pts: Pt[], shape: MarkerShape, fx: (x: number) => number, fy: 
 }
 
 // dimensional: x in km, Δσ̄_rr in kPa
-/** Half-width: the patch plus 2.6 decay lengths of the widest run, snapped. */
-const xHalf = computed(() => {
-  const ss = series.value
-  if (!ss.length) return 15
-  const need = Math.max(...ss.map((sr) => (sr.p.R + 2.6 * sr.s.decayM) / 1000))
-  for (const h of [5, 10, 15, 20, 25]) if (h >= need) return h
-  return 25
-})
+// FIXED AXES, the director's rule (2026-11-21 night: "the axes are having a
+// seizure when I move the slider") — nothing below depends on the group or
+// the selection, so the λ slider and the chips only move the curves.
+/** Half-width in km: the baked profiles' own extent. */
+const X_HALF_KM = 25
+/** The sweep's largest |Δσ̄_rr| along y = 0 is 618 kPa (R = 5 km, H = 300 m,
+ *  α = 1°, γ = 1); ±750 puts a 250 kPa tick on each frame edge. */
+const Y_LIM_KPA = 750
+/** The scales plate inside the dimensionless plot (viewBox units). */
+const CAPW = 330
+const CAPH = 96
+/** Dimensionless half-width: at least 2.3 decay lengths past the patch
+ *  edge for 21 of the 23 λ groups (λ ≤ 3.73); the two largest (5.9, 11.8)
+ *  show their patch edges at or beyond the frame. */
+const N_HALF = 6
+/** The sweep's largest |Δσ̄_rr| / [τ] is 1.57. */
+const N_LIM = 2
+const xHalf = computed(() => X_HALF_KM)
 const dimSimPts = computed<Pt[][]>(() =>
   series.value.map((sr) => {
     const pts: Pt[] = []
@@ -356,11 +369,7 @@ const dimThPts = computed<Pt[][]>(() =>
     return pts
   }),
 )
-const yLim = computed(() => {
-  let m = 0
-  for (const pts of [...dimSimPts.value, ...dimThPts.value]) for (const [, v] of pts) m = Math.max(m, Math.abs(v))
-  return niceCeil(m * 1.12 || 1)
-})
+const yLim = computed(() => Y_LIM_KPA)
 const yTicks = computed(() => symTicks(yLim.value))
 const xTicks = computed(() => symTicks(xHalf.value))
 function px(xkm: number): number {
@@ -376,20 +385,7 @@ const dimTheory = computed(() => dimThPts.value.map((pts) => linePath(pts, px, p
 // dimensionless: x̃ = x k₀, Δσ̄_rr / [τ]
 const lam = computed(() => group.value?.lambda ?? COLLAPSE_DEFAULT_LAMBDA)
 const refS = computed(() => series.value[0]?.s ?? slabScales({ H: 1000, alphaDeg: 1, gamma: 0.1, R: 2500 }))
-/** Half-width: λ + 3 snapped, but never past the data's ±25 km. */
-const nHalf = computed(() => {
-  const ss = series.value
-  const dataMax = ss.length ? Math.min(...ss.map((sr) => 25000 / sr.s.decayM)) : 4
-  const want = lam.value + 3
-  let h = 20
-  for (const c of [2, 3, 4, 5, 6, 8, 10, 12, 15, 20]) {
-    if (c >= want) {
-      h = c
-      break
-    }
-  }
-  return Math.min(h, Math.floor(dataMax * 10) / 10)
-})
+const nHalf = computed(() => N_HALF)
 function scaledPts(s: SlabScales, srr: number[]): Pt[] {
   const kx = 1000 / s.decayM
   const ky = 1000 / s.stressPa
@@ -412,11 +408,7 @@ const nThPts = computed<Pt[]>(() => {
   }
   return pts
 })
-const nyLim = computed(() => {
-  let m = 0
-  for (const pts of [...nSimPts.value, nThPts.value]) for (const [, v] of pts) m = Math.max(m, Math.abs(v))
-  return niceCeil(m * 1.12 || 1)
-})
+const nyLim = computed(() => N_LIM)
 const nyTicks = computed(() => symTicks(nyLim.value))
 const nxTicks = computed(() => symTicks(nHalf.value))
 function nx(xt: number): number {
@@ -624,7 +616,7 @@ function fmtK(v: number): string {
   border: 1px solid rgba(0, 0, 0, 0.55);
 }
 .cl-lam-v { font-size: 1.1rem; font-weight: 600; color: #fff8e6; font-variant-numeric: tabular-nums; min-width: 2.6rem; }
-.cl-lam-n { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dim); white-space: nowrap; }
+.cl-lam-n { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dim); white-space: nowrap; min-width: 4.2rem; font-variant-numeric: tabular-nums; }
 .cl-sw {
   justify-self: end;
   border: 1px solid rgba(232, 185, 74, 0.35);
@@ -684,44 +676,54 @@ function fmtK(v: number): string {
 .cl-hov { font-weight: 500; fill: #fff8e6; paint-order: stroke; stroke: rgba(5, 5, 5, 0.85); stroke-width: 4; pointer-events: none; }
 
 .cl-leg {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  /* a grid of same-sized two-line chips, exactly two rows tall whatever the group
+     (nine chips fit at 1366 px and up) — the plots above never change height */
+  --chip-h: 3.1rem;
+  height: calc(2 * var(--chip-h) + 0.5rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: var(--chip-h);
   gap: 0.5rem 0.7rem;
+  overflow: hidden;
 }
 .cl-chip {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 0.5rem;
+  row-gap: 0.1rem;
   align-items: center;
-  gap: 0.55rem;
+  align-content: center;
+  text-align: left;
   border: 1px solid rgba(232, 185, 74, 0.22);
   background: rgba(8, 6, 4, 0.55);
   color: rgba(245, 240, 230, 0.55);
-  font: 400 0.92rem/1.1 'Inter', system-ui, sans-serif;
-  padding: 0.42rem 0.8rem 0.42rem 0.6rem;
-  border-radius: 999px;
+  font: 400 0.84rem/1.15 'Inter', system-ui, sans-serif;
+  padding: 0 0.7rem 0 0.55rem;
+  border-radius: 14px;
   cursor: pointer;
   white-space: nowrap;
+  overflow: hidden;
 }
 .cl-chip:hover { border-color: var(--gold-dim); }
 .cl-chip-on { color: #f5f0e6; border-color: var(--c); box-shadow: 0 0 10px color-mix(in srgb, var(--c) 35%, transparent); }
-.cl-chip-m { width: 22px; height: 22px; flex: none; }
+.cl-chip-m { width: 22px; height: 22px; grid-row: 1 / 3; }
 .cl-chip:not(.cl-chip-on) .cl-chip-m { opacity: 0.5; }
 .cl-chip-p { font-variant-numeric: tabular-nums; }
 .cl-chip-s {
-  display: inline-block;
-  line-height: 1.3;
-  padding-left: 0.7rem;
-  border-left: 1px solid rgba(232, 185, 74, 0.3);
-  font-size: 0.86rem;
+  display: block;
+  line-height: 1.2;
+  font-size: 0.78rem;
   color: #fff8e6;
   font-variant-numeric: tabular-nums;
 }
+.cl-chip:not(.cl-chip-on) .cl-chip-s { color: rgba(245, 240, 230, 0.45); }
+.cl-capwrap { display: flex; justify-content: flex-end; }
 .cl-cap {
-  margin-left: auto;
   padding: 0.3rem 0.9rem;
   border: 1px solid rgba(232, 185, 74, 0.22);
   border-radius: 10px;
-  background: rgba(8, 6, 4, 0.5);
+  background: rgba(8, 6, 4, 0.55);
 }
 
 /* ── view 1 ── */

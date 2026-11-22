@@ -59,7 +59,6 @@
         <DfdModel v-else-if="beatId === 'model'" />
         <DfdSolutions v-else-if="beatId === 'solutions'" />
         <DfdLab v-else-if="beatId === 'lab'" />
-        <DfdValidity v-else-if="beatId === 'stokes'" />
 
         <!-- the collapse: the paper's Fig. 3 C–D re-drawn live from the sweep -->
         <DfdCollapse v-else-if="beatId === 'collapse'" :step="sub" @step="setSub" />
@@ -88,7 +87,6 @@ import DfdProblem from '../DfdProblem.vue'
 import DfdModel from '../DfdModel.vue'
 import DfdSolutions from '../DfdSolutions.vue'
 import DfdLab from '../DfdLab.vue'
-import DfdValidity from '../DfdValidity.vue'
 import DfdCollapse from '../DfdCollapse.vue'
 import DfdEq from '../DfdEq.vue'
 import FieldworkExplorer from '../FieldworkExplorer.vue'
